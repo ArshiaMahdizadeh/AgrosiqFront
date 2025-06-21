@@ -1,10 +1,12 @@
 import './globals.css';
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import ClientProviders from './client-providers';
+import { ThemeProvider } from "@/components/theme-provider";
+import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Agrosiq - Smart and Reliable Agricultural Exports',
   description: 'Advanced agricultural exports platform with forecasting, traceability, and authenticity verification.',
   manifest: '/manifest.json',
@@ -12,16 +14,7 @@ export const metadata = {
     { rel: 'icon', url: '/favicon.ico' },
     { rel: 'apple-touch-icon', sizes: '180x180', url: '/apple-touch-icon.png' },
   ],
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
-  ],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+  themeColor: '#00796B',
 };
 
 export default function RootLayout({
@@ -31,15 +24,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="msapplication-TileColor" content="#00796B" />
-      </head>
       <body className={inter.className}>
-        <ClientProviders>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
-        </ClientProviders>
+          <MobileBottomNav />
+        </ThemeProvider>
       </body>
     </html>
   );

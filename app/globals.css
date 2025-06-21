@@ -134,3 +134,10 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
 }
+
+/* Mobile bottom navigation safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

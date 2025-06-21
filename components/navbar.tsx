@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -10,59 +10,70 @@ import gsap from "gsap";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<gsap.core.Timeline>();
 
-  // Initialize animations
   useEffect(() => {
-    gsap.set(mobileMenuRef.current, { x: "100%" });
-    gsap.set(overlayRef.current, { opacity: 0 });
-
-    animationRef.current = gsap.timeline({ paused: true })
-      .to(overlayRef.current, {
-        opacity: 1,
-        duration: 0.2,
-        ease: "power1.out"
-      })
-      .to(mobileMenuRef.current, {
-        x: 0,
-        duration: 0.3,
-        ease: "power2.out"
-      }, "-=0.1");
-
-    return () => {
-      animationRef.current?.kill();
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
     };
-  }, []);
-
-  // Handle menu state changes
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      // Show elements immediately
-      gsap.set([overlayRef.current, mobileMenuRef.current], { display: "block" });
-      animationRef.current?.play();
-    } else {
-      animationRef.current?.reverse().then(() => {
-        // Hide elements after animation completes
-        gsap.set([overlayRef.current, mobileMenuRef.current], { display: "none" });
-        document.body.style.overflow = "unset";
-      });
-    }
-  }, [mobileMenuOpen]);
-
-  const toggleMenu = () => {
-    // Immediate state update
-    setMobileMenuOpen(prev => !prev);
-  };
-
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Prevent body scroll when menu is open
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Mobile menu animation
+    if (mobileMenuOpen) {
+      gsap.fromTo(
+        ".mobile-menu",
+        {
+          x: "100%",
+          opacity: 0,
+        },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 0.4,
+          ease: "power3.out",
+        }
+      );
+
+      // Animate overlay
+      gsap.to(".menu-overlay", {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    } else {
+      gsap.to(".mobile-menu", {
+        x: "100%",
+        opacity: 0,
+        duration: 0.3,
+        ease: "power3.in",
+      });
+
+      // Fade out overlay
+      gsap.to(".menu-overlay", {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+      });
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -92,7 +103,7 @@ export function Navbar() {
             Verify Authenticity
           </Link>
           <div className="flex gap-2">
-            <Button variant="outline" className="dark:text-gray-900" asChild>
+            <Button variant="outline" asChild>
               <Link href="/sign-in">Sign In</Link>
             </Button>
             <Button variant="default" className="bg-primary hover:bg-primary-600 text-white" asChild>
@@ -102,68 +113,97 @@ export function Navbar() {
           <ThemeToggle />
         </nav>
 
-        {/* Mobile Menu Button - NOW WORKING PROPERLY */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
           <ThemeToggle />
           <Button 
             variant="ghost" 
             size="icon" 
-            onClick={toggleMenu}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="ml-2 hover:bg-gray-100 dark:hover:bg-gray-800"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </Button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        ref={overlayRef}
-        className="fixed inset-0 bg-black/50 md:hidden z-40 hidden"
-        onClick={toggleMenu}
-        aria-hidden="true"
-      />
+      {mobileMenuOpen && (
+        <div 
+          className="menu-overlay fixed inset-0 bg-black/50 opacity-0 md:hidden z-60"
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Mobile Menu */}
       <div 
-        ref={mobileMenuRef}
-        className="fixed top-0 right-0 w-[300px] h-screen bg-white dark:bg-gray-900 shadow-xl md:hidden z-50 overflow-y-auto hidden"
+        className={`mobile-menu fixed top-0 right-0 w-[300px] h-screen bg-white dark:bg-gray-900 shadow-xl transform translate-x-full md:hidden z-50 overflow-y-auto z-60`}
         role="dialog"
         aria-modal="true"
+        aria-label="Navigation menu"
       >
         <div className="flex flex-col min-h-screen">
-          <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+          {/* Menu Header with Close Button */}
+          <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Plant className="h-6 w-6 text-primary" />
               <span className="text-lg font-bold text-primary dark:text-primary-100">
                 Agrosiq
               </span>
             </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={closeMobileMenu}
+              className="hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+              aria-label="Close menu"
+            >
+              <X className="h-5 w-5" />
+            </Button>
           </div>
 
+          {/* Menu Items */}
           <nav className="flex-1 p-4">
             <div className="space-y-1">
-              <Link href="/" className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors" onClick={toggleMenu}>
+              <Link
+                href="/"
+                className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors"
+                onClick={closeMobileMenu}
+              >
                 Home
               </Link>
-              <Link href="/product-registration" className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors" onClick={toggleMenu}>
+              <Link
+                href="/product-registration"
+                className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors"
+                onClick={closeMobileMenu}
+              >
                 Register Product
               </Link>
-              <Link href="/verify-authenticity" className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors" onClick={toggleMenu}>
+              <Link
+                href="/verify-authenticity"
+                className="block px-4 py-3 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 dark:text-gray-200 dark:hover:text-primary-300 dark:hover:bg-gray-800 transition-colors"
+                onClick={closeMobileMenu}
+              >
                 Verify Authenticity
               </Link>
             </div>
           </nav>
 
+          {/* Action Buttons */}
           <div className="p-4 border-t border-gray-200 dark:border-gray-800">
             <div className="space-y-2">
-              <Button variant="outline" className="w-full justify-center dark:text-gray-900" asChild onClick={toggleMenu}>
-                <Link href="/sign-in">Sign In</Link>
+              <Button variant="outline" asChild className="w-full justify-center">
+                <Link href="/sign-in" onClick={closeMobileMenu}>Sign In</Link>
               </Button>
-              <Button variant="default" className="w-full bg-primary hover:bg-primary-600 text-white justify-center" asChild onClick={toggleMenu}>
-                <Link href="/register">Register</Link>
+              <Button variant="default" className="w-full bg-primary hover:bg-primary-600 text-white justify-center" asChild>
+                <Link href="/register" onClick={closeMobileMenu}>Register</Link>
               </Button>
             </div>
           </div>
