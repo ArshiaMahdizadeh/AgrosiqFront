@@ -282,7 +282,7 @@ export default function DocumentManagement() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Download className="h-4 w-4" />
             Export List
           </Button>
@@ -330,6 +330,7 @@ export default function DocumentManagement() {
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={isUploading}
+                className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
               >
                 Select Files
               </Button>
@@ -367,34 +368,34 @@ export default function DocumentManagement() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Search documents..."
-                  className="pl-9"
+                  className="pl-9 dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
             <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] dark:bg-gray-700 dark:text-white dark:border-gray-700">
                 <SelectValue placeholder="Document Type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem className="dark:hover:bg-gray-700" value="all">All Types</SelectItem>
                 {documentTypes.map((type) => (
-                  <SelectItem key={type} value={type}>
+                  <SelectItem className="dark:hover:bg-gray-700" key={type} value={type}>
                     {type}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
             <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] dark:bg-gray-700 dark:text-white dark:border-gray-700">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="approved">Approved</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="rejected">Rejected</SelectItem>
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Status</SelectItem>
+                <SelectItem value="approved" className="dark:hover:bg-gray-700">Approved</SelectItem>
+                <SelectItem value="pending" className="dark:hover:bg-gray-700">Pending</SelectItem>
+                <SelectItem value="rejected" className="dark:hover:bg-gray-700">Rejected</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -451,7 +452,7 @@ export default function DocumentManagement() {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="flex-1 text-xs px-2 py-1 h-8"
+                        className="flex-1 text-xs px-2 py-1 h-8 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                       >
                         <Eye className="h-3.5 w-3.5 mr-1.5" />
                         View
@@ -459,7 +460,7 @@ export default function DocumentManagement() {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        className="flex-1 text-xs px-2 py-1 h-8"
+                        className="flex-1 text-xs px-2 py-1 h-8 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                       >
                         <Share2 className="h-3.5 w-3.5 mr-1.5" />
                         Share
@@ -469,7 +470,7 @@ export default function DocumentManagement() {
                           <Button 
                             variant="outline" 
                             size="sm" 
-                            className="flex-1 text-xs px-2 py-1 h-8"
+                            className="flex-1 text-xs px-2 py-1 h-8 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                           >
                             <Trash2 className="h-3.5 w-3.5 mr-1.5" />
                             Delete
@@ -508,7 +509,7 @@ export default function DocumentManagement() {
               size="icon"
               onClick={() => instanceRef.current?.prev()}
               disabled={currentSlide === 0}
-              className="rounded-full"
+              className="rounded-full border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
@@ -520,7 +521,7 @@ export default function DocumentManagement() {
                 currentSlide ===
                 instanceRef.current?.track.details.slides.length - 1
               }
-              className="rounded-full"
+              className="rounded-full border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
             >
               <ChevronRight className="h-4 w-4" />
             </Button>

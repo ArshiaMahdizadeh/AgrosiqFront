@@ -182,7 +182,7 @@ export default function Competitors() {
   });
 
   return (
-    <div ref={pageRef} className="space-y-6 p-6">
+    <div ref={pageRef} className="space-y-6 p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -194,11 +194,11 @@ export default function Competitors() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <Download className="h-4 w-4" />
             Export Report
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <Calendar className="h-4 w-4" />
             Last 30 Days
           </Button>
@@ -206,7 +206,7 @@ export default function Competitors() {
       </div>
 
       {/* Filters */}
-      <Card className="border-none shadow-sm">
+      <Card className="border-none shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -214,32 +214,32 @@ export default function Competitors() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Search competitors..."
-                  className="pl-9"
+                  className="pl-9 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
             <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Select region" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Regions</SelectItem>
-                <SelectItem value="Global">Global</SelectItem>
-                <SelectItem value="North America">North America</SelectItem>
-                <SelectItem value="Europe">Europe</SelectItem>
-                <SelectItem value="Asia">Asia</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Regions</SelectItem>
+                <SelectItem value="Global" className="dark:hover:bg-gray-700">Global</SelectItem>
+                <SelectItem value="North America" className="dark:hover:bg-gray-700">North America</SelectItem>
+                <SelectItem value="Europe" className="dark:hover:bg-gray-700">Europe</SelectItem>
+                <SelectItem value="Asia" className="dark:hover:bg-gray-700">Asia</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedSegment} onValueChange={setSelectedSegment}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Select segment" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Segments</SelectItem>
-                <SelectItem value="Enterprise">Enterprise</SelectItem>
-                <SelectItem value="Mid-Market">Mid-Market</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Segments</SelectItem>
+                <SelectItem value="Enterprise" className="dark:hover:bg-gray-700">Enterprise</SelectItem>
+                <SelectItem value="Mid-Market" className="dark:hover:bg-gray-700">Mid-Market</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -249,7 +249,7 @@ export default function Competitors() {
       {/* Competitor Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredCompetitors.map((competitor) => (
-          <Card key={competitor.id} className="competitor-card">
+          <Card key={competitor.id} className="competitor-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardHeader className="pb-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
@@ -261,8 +261,8 @@ export default function Competitors() {
                     />
                   </div>
                   <div>
-                    <CardTitle className="text-lg">{competitor.name}</CardTitle>
-                    <CardDescription>{competitor.region}</CardDescription>
+                    <CardTitle className="text-lg text-gray-900 dark:text-white">{competitor.name}</CardTitle>
+                    <CardDescription className="text-gray-600 dark:text-gray-400">{competitor.region}</CardDescription>
                   </div>
                 </div>
                 <Badge
@@ -282,18 +282,18 @@ export default function Competitors() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Market Share</p>
-                  <p className="text-lg font-semibold">{competitor.marketShare}%</p>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white">{competitor.marketShare}%</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Revenue</p>
-                  <p className="text-lg font-semibold">${competitor.revenue}</p>
+                  <p className="text-lg font-semibold text-gray-900 dark:text-white">${competitor.revenue}</p>
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-gray-500 dark:text-gray-400">Growth</p>
                   <div className={`flex items-center ${
-                    competitor.growth > 0 ? "text-green-600" : "text-red-600"
+                    competitor.growth > 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                   }`}>
                     {competitor.growth > 0 ? (
                       <TrendingUp className="h-4 w-4" />
@@ -307,14 +307,14 @@ export default function Competitors() {
                 </div>
               </div>
               <div>
-                <p className="text-sm font-medium mb-2">Recent Activity</p>
+                <p className="text-sm font-medium mb-2 text-gray-900 dark:text-white">Recent Activity</p>
                 <div className="space-y-2">
                   {competitor.recentActivity.map((activity, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full bg-primary mt-1.5" />
                       <div>
-                        <p className="text-sm">{activity.event}</p>
-                        <p className="text-xs text-gray-500">{activity.date}</p>
+                        <p className="text-sm text-gray-900 dark:text-white">{activity.event}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{activity.date}</p>
                       </div>
                     </div>
                   ))}
@@ -328,10 +328,10 @@ export default function Competitors() {
       {/* Analysis Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Performance Comparison */}
-        <Card className="chart-container">
+        <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Performance Comparison</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-gray-900 dark:text-white">Performance Comparison</CardTitle>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               Key metrics comparison with top competitors
             </CardDescription>
           </CardHeader>
@@ -339,9 +339,9 @@ export default function Competitors() {
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={performanceData}>
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="metric" />
-                  <PolarRadiusAxis />
+                  <PolarGrid stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                  <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
+                  <PolarRadiusAxis tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
                   <Radar
                     name="Our Company"
                     dataKey="us"
@@ -371,10 +371,10 @@ export default function Competitors() {
         </Card>
 
         {/* Market Trends */}
-        <Card className="chart-container">
+        <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>Market Trends</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-gray-900 dark:text-white">Market Trends</CardTitle>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               Performance trends over the last 6 months
             </CardDescription>
           </CardHeader>
@@ -382,10 +382,17 @@ export default function Competitors() {
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={marketTrendsData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                  <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: 'var(--background)',
+                      border: '1px solid var(--border)',
+                      borderRadius: '8px',
+                      color: 'var(--foreground)'
+                    }}
+                  />
                   <Legend />
                   <Line
                     type="monotone"
@@ -417,7 +424,7 @@ export default function Competitors() {
 
       {/* Key Metrics Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-primary/10 rounded-full">
@@ -427,13 +434,13 @@ export default function Competitors() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Total Markets
                 </p>
-                <p className="text-2xl font-bold">42</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">42</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-primary/10 rounded-full">
@@ -443,13 +450,13 @@ export default function Competitors() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Active Competitors
                 </p>
-                <p className="text-2xl font-bold">15</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">15</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-primary/10 rounded-full">
@@ -459,13 +466,13 @@ export default function Competitors() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Market Size
                 </p>
-                <p className="text-2xl font-bold">$8.2B</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">$8.2B</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-primary/10 rounded-full">
@@ -475,7 +482,7 @@ export default function Competitors() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Growth Rate
                 </p>
-                <p className="text-2xl font-bold">+12.5%</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">+12.5%</p>
               </div>
             </div>
           </CardContent>

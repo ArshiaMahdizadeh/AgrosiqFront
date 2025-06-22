@@ -182,11 +182,11 @@ export default function SearchPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <History className="h-4 w-4" />
             History
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Bookmark className="h-4 w-4" />
             Saved
           </Button>
@@ -204,7 +204,7 @@ export default function SearchPage() {
                 placeholder="Search products, markets, competitors..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
+                className="pl-9 dark:bg-gray-700 dark:text-white dark:border-gray-700"
               />
             </div>
             <Button 
@@ -244,7 +244,7 @@ export default function SearchPage() {
               variant="ghost"
               size="sm"
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 dark:hover:bg-gray-700"
             >
               <Filter className="h-4 w-4" />
               Advanced Filters
@@ -262,15 +262,15 @@ export default function SearchPage() {
               <div className="space-y-2">
                 <Label>Category</Label>
                 <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700">
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Categories</SelectItem>
-                    <SelectItem value="products">Products</SelectItem>
-                    <SelectItem value="markets">Markets</SelectItem>
-                    <SelectItem value="competitors">Competitors</SelectItem>
-                    <SelectItem value="reports">Reports</SelectItem>
+                    <SelectItem value="all" className="dark:hover:bg-gray-700">All Categories</SelectItem>
+                    <SelectItem value="products" className="dark:hover:bg-gray-700">Products</SelectItem>
+                    <SelectItem value="markets" className="dark:hover:bg-gray-700">Markets</SelectItem>
+                    <SelectItem value="competitors" className="dark:hover:bg-gray-700">Competitors</SelectItem>
+                    <SelectItem value="reports" className="dark:hover:bg-gray-700">Reports</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -278,15 +278,15 @@ export default function SearchPage() {
               <div className="space-y-2">
                 <Label>Date Range</Label>
                 <Select value={dateRange} onValueChange={setDateRange}>
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700">
                     <SelectValue placeholder="Select date range" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Time</SelectItem>
-                    <SelectItem value="today">Today</SelectItem>
-                    <SelectItem value="week">This Week</SelectItem>
-                    <SelectItem value="month">This Month</SelectItem>
-                    <SelectItem value="year">This Year</SelectItem>
+                    <SelectItem value="all" className="dark:hover:bg-gray-700">All Time</SelectItem>
+                    <SelectItem value="today" className="dark:hover:bg-gray-700">Today</SelectItem>
+                    <SelectItem value="week" className="dark:hover:bg-gray-700">This Week</SelectItem>
+                    <SelectItem value="month" className="dark:hover:bg-gray-700">This Month</SelectItem>
+                    <SelectItem value="year" className="dark:hover:bg-gray-700">This Year</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -334,14 +334,14 @@ export default function SearchPage() {
         <Button
           variant={activeTab === "results" ? "default" : "ghost"}
           onClick={() => setActiveTab("results")}
-          className={activeTab === "results" ? "bg-primary text-white" : ""}
+          className={activeTab === "results" ? "bg-primary text-white" : "dark:hover:bg-gray-700"}
         >
           Search Results
         </Button>
         <Button
           variant={activeTab === "analytics" ? "default" : "ghost"}
           onClick={() => setActiveTab("analytics")}
-          className={activeTab === "analytics" ? "bg-primary text-white" : ""}
+          className={activeTab === "analytics" ? "bg-primary text-white" : "dark:hover:bg-gray-700"}
         >
           Search Analytics
         </Button>
@@ -349,54 +349,63 @@ export default function SearchPage() {
 
       {activeTab === "results" ? (
         /* Search Results */
-        <div ref={resultsRef} className="space-y-4">
-          {searchResults.map((result) => (
-            <Card key={result.id} className="search-result hover:shadow-md transition-shadow">
-              <CardContent className="p-4">
-                <div className="flex items-start gap-4">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <result.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                          {result.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          {result.description}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="flex items-center gap-1">
-                          <Star className="h-3 w-3 text-yellow-500" />
-                          {result.relevance}%
-                        </Badge>
-                        <Button variant="ghost" size="icon">
-                          <Save className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="mt-2 flex items-center gap-4">
-                      <Badge variant="secondary">{result.category}</Badge>
-                      <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                        <Clock className="h-3 w-3" />
-                        {result.timestamp}
-                      </div>
-                      <div className="flex gap-2">
-                        {result.tags.map((tag, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+<div ref={resultsRef} className="space-y-4">
+  {searchResults.map((result) => (
+    <Card
+      key={result.id}
+      className="search-result hover:shadow-md transition-shadow overflow-hidden"
+    >
+      <CardContent className="p-4">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          {/* Icon */}
+          <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0 w-fit">
+            <result.icon className="h-6 w-6 text-primary" />
+          </div>
+
+          {/* Main Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+                  {result.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 break-words">
+                  {result.description}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 mt-2 sm:mt-0 flex-shrink-0">
+                <Badge variant="outline" className="flex items-center gap-1">
+                  <Star className="h-3 w-3 text-yellow-500" />
+                  {result.relevance}%
+                </Badge>
+                <Button variant="ghost" size="icon" className="dark:hover:bg-gray-700">
+                  <Save className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Meta Info */}
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+              <Badge variant="secondary">{result.category}</Badge>
+              <div className="flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {result.timestamp}
+              </div>
+              {result.tags.map((tag, index) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
         </div>
+      </CardContent>
+    </Card>
+  ))}
+</div>
+
+
       ) : (
         /* Search Analytics */
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -466,7 +475,7 @@ export default function SearchPage() {
                           <span className="text-sm font-medium">{item.name}</span>
                           <p className="text-xs text-gray-500">{item.filters}</p>
                         </div>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" className="dark:hover:bg-gray-700">
                           <SearchIcon className="h-4 w-4" />
                         </Button>
                       </div>

@@ -182,21 +182,21 @@ export default function AnalyticsPage() {
         </div>
         <div className="flex items-center gap-2">
           <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-            <SelectTrigger className="w-[140px]">
+            <SelectTrigger className="w-[140px] border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
               <SelectValue placeholder="Period" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="1month">Last Month</SelectItem>
-              <SelectItem value="3months">Last 3 Months</SelectItem>
-              <SelectItem value="6months">Last 6 Months</SelectItem>
-              <SelectItem value="1year">Last Year</SelectItem>
+              <SelectItem value="1month" className="dark:hover:bg-gray-700">Last Month</SelectItem>
+              <SelectItem value="3months" className="dark:hover:bg-gray-700">Last 3 Months</SelectItem>
+              <SelectItem value="6months" className="dark:hover:bg-gray-700">Last 6 Months</SelectItem>
+              <SelectItem value="1year" className="dark:hover:bg-gray-700">Last Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Download className="h-4 w-4" />
             Export
           </Button>
@@ -359,23 +359,23 @@ export default function AnalyticsPage() {
       {/* Analytics Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsList className="grid grid-cols-2 lg:grid-cols-5 w-full">
-          <TabsTrigger value="overview" className="flex items-center gap-2">
+          <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <BarChart3 className="h-4 w-4" />
             Overview
           </TabsTrigger>
-          <TabsTrigger value="products" className="flex items-center gap-2">
+          <TabsTrigger value="products" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <Package className="h-4 w-4" />
             Products
           </TabsTrigger>
-          <TabsTrigger value="regions" className="flex items-center gap-2">
+          <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <Globe className="h-4 w-4" />
             Regions
           </TabsTrigger>
-          <TabsTrigger value="competitive" className="flex items-center gap-2">
+          <TabsTrigger value="competitive" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <Target className="h-4 w-4" />
             Competitive
           </TabsTrigger>
-          <TabsTrigger value="forecast" className="flex items-center gap-2">
+          <TabsTrigger value="forecast" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <TrendingUp className="h-4 w-4" />
             Forecast
           </TabsTrigger>
@@ -717,14 +717,14 @@ export default function AnalyticsPage() {
             <div className="space-y-4">
               <h4 className="font-medium">Report Type</h4>
               <Select defaultValue="performance">
-                <SelectTrigger>
+                <SelectTrigger className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <SelectValue placeholder="Select report type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="performance">Performance Report</SelectItem>
-                  <SelectItem value="market">Market Analysis</SelectItem>
-                  <SelectItem value="financial">Financial Report</SelectItem>
-                  <SelectItem value="competitive">Competitive Analysis</SelectItem>
+                  <SelectItem value="performance" className="dark:hover:bg-gray-700">Performance Report</SelectItem>
+                  <SelectItem value="market" className="dark:hover:bg-gray-700">Market Analysis</SelectItem>
+                  <SelectItem value="financial" className="dark:hover:bg-gray-700">Financial Report</SelectItem>
+                  <SelectItem value="competitive" className="dark:hover:bg-gray-700">Competitive Analysis</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -732,13 +732,13 @@ export default function AnalyticsPage() {
             <div className="space-y-4">
               <h4 className="font-medium">Format</h4>
               <Select defaultValue="pdf">
-                <SelectTrigger>
+                <SelectTrigger className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <SelectValue placeholder="Select format" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="pdf">PDF Report</SelectItem>
-                  <SelectItem value="excel">Excel Spreadsheet</SelectItem>
-                  <SelectItem value="powerpoint">PowerPoint Presentation</SelectItem>
+                  <SelectItem value="pdf" className="dark:hover:bg-gray-700">PDF Report</SelectItem>
+                  <SelectItem value="excel" className="dark:hover:bg-gray-700">Excel Spreadsheet</SelectItem>
+                  <SelectItem value="powerpoint" className="dark:hover:bg-gray-700">PowerPoint Presentation</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -750,7 +750,7 @@ export default function AnalyticsPage() {
                   <Download className="h-4 w-4 mr-2" />
                   Generate
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <Share2 className="h-4 w-4 mr-2" />
                   Share
                 </Button>

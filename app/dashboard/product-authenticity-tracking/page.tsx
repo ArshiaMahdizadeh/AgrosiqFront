@@ -193,7 +193,7 @@ export default function ProductAuthenticity() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Download className="h-4 w-4" />
             Export Report
           </Button>
@@ -278,16 +278,18 @@ export default function ProductAuthenticity() {
               </div>
 
               <div className="flex gap-2">
-                <Input
-                  placeholder="Enter product ID (e.g., SF001)"
-                  value={productId}
-                  onChange={(e) => setProductId(e.target.value)}
-                  className={error ? "border-red-500" : ""}
-                />
+              <Input
+  placeholder="Enter product ID (e.g., SF001)"
+  value={productId}
+  onChange={(e) => setProductId(e.target.value)}
+  className={`${error ? "border-red-500" : ""} dark:bg-gray-700 dark:text-white dark:border-gray-700`}
+/>
+
                 <Button
                   variant="outline"
                   onClick={() => handleSearch("")}
                   disabled={scanning}
+                  className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                 >
                   <Search className="h-4 w-4" />
                 </Button>

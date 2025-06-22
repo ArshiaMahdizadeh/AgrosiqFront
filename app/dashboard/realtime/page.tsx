@@ -220,7 +220,7 @@ export default function Realtime() {
   };
 
   return (
-    <div ref={pageRef} className="space-y-8 p-6">
+    <div ref={pageRef} className="space-y-8 p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -233,20 +233,21 @@ export default function Realtime() {
         </div>
         <div className="flex items-center gap-2">
           <Select value={updateFrequency} onValueChange={setUpdateFrequency}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <SelectValue placeholder="Update frequency" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">Every 1 second</SelectItem>
-              <SelectItem value="5">Every 5 seconds</SelectItem>
-              <SelectItem value="10">Every 10 seconds</SelectItem>
-              <SelectItem value="30">Every 30 seconds</SelectItem>
+            <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+              <SelectItem value="1" className="dark:hover:bg-gray-700">Every 1 second</SelectItem>
+              <SelectItem value="5" className="dark:hover:bg-gray-700">Every 5 seconds</SelectItem>
+              <SelectItem value="10" className="dark:hover:bg-gray-700">Every 10 seconds</SelectItem>
+              <SelectItem value="30" className="dark:hover:bg-gray-700">Every 30 seconds</SelectItem>
             </SelectContent>
           </Select>
           <Button
             variant="outline"
             size="icon"
             onClick={() => setIsStreaming(!isStreaming)}
+            className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white"
           >
             {isStreaming ? (
               <Pause className="h-4 w-4" />
@@ -254,19 +255,19 @@ export default function Realtime() {
               <Play className="h-4 w-4" />
             )}
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <Settings className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
       {/* Connection Status */}
-      <Card className="metrics-card">
+      <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardContent className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Signal className="h-5 w-5 text-primary" />
-              <span className="font-medium">Connection Status</span>
+              <span className="font-medium text-gray-900 dark:text-white">Connection Status</span>
             </div>
             <Badge
               variant={connectionStatus === "connected" ? "default" : "destructive"}
@@ -283,16 +284,16 @@ export default function Realtime() {
 
       {/* System Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <Cpu className="h-4 w-4 text-primary" />
               CPU Usage
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {systemMetrics.cpu.toFixed(1)}%
               </div>
               <Progress value={systemMetrics.cpu} className="h-2" />
@@ -300,16 +301,16 @@ export default function Realtime() {
           </CardContent>
         </Card>
 
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <Activity className="h-4 w-4 text-primary" />
               Memory Usage
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {systemMetrics.memory.toFixed(1)}%
               </div>
               <Progress value={systemMetrics.memory} className="h-2" />
@@ -317,16 +318,16 @@ export default function Realtime() {
           </CardContent>
         </Card>
 
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <HardDrive className="h-4 w-4 text-primary" />
               Disk Usage
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {systemMetrics.disk.toFixed(1)}%
               </div>
               <Progress value={systemMetrics.disk} className="h-2" />
@@ -334,16 +335,16 @@ export default function Realtime() {
           </CardContent>
         </Card>
 
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
+            <CardTitle className="text-sm font-medium flex items-center gap-2 text-gray-600 dark:text-gray-400">
               <Network className="h-4 w-4 text-primary" />
               Network Load
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">
                 {systemMetrics.network.toFixed(1)}%
               </div>
               <Progress value={systemMetrics.network} className="h-2" />
@@ -353,19 +354,26 @@ export default function Realtime() {
       </div>
 
       {/* Market Prices Chart */}
-      <Card className="chart-container">
+      <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardHeader>
-          <CardTitle>Market Price Trends</CardTitle>
-          <CardDescription>Real-time price updates for key products</CardDescription>
+          <CardTitle className="text-gray-900 dark:text-white">Market Price Trends</CardTitle>
+          <CardDescription className="text-gray-600 dark:text-gray-400">Real-time price updates for key products</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={priceHistory}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                <XAxis dataKey="timestamp" stroke="#6b7280" className="dark:stroke-gray-400" />
+                <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                <Tooltip 
+                  contentStyle={{
+                    backgroundColor: 'var(--background)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '8px',
+                    color: 'var(--foreground)'
+                  }}
+                />
                 <Line
                   type="monotone"
                   dataKey="saffron"
@@ -402,9 +410,9 @@ export default function Realtime() {
 
       {/* Service Status and Notifications */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               <Database className="h-5 w-5 text-primary" />
               Service Status
             </CardTitle>
@@ -414,11 +422,11 @@ export default function Realtime() {
               {Object.entries(serviceStatus).map(([service, status]) => (
                 <div
                   key={service}
-                  className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
                 >
                   <div className="flex items-center gap-2">
                     {getStatusIcon(status)}
-                    <span className="capitalize">{service.replace(/([A-Z])/g, ' $1').trim()}</span>
+                    <span className="capitalize text-gray-900 dark:text-white">{service.replace(/([A-Z])/g, ' $1').trim()}</span>
                   </div>
                   <Badge
                     variant={
@@ -437,9 +445,9 @@ export default function Realtime() {
           </CardContent>
         </Card>
 
-        <Card className="metrics-card">
+        <Card className="metrics-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               <AlertCircle className="h-5 w-5 text-primary" />
               Live Notifications
             </CardTitle>
@@ -449,11 +457,11 @@ export default function Realtime() {
               {notifications.map((notification) => (
                 <div
                   key={notification.id}
-                  className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                  className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
                 >
                   {getNotificationIcon(notification.type)}
                   <div className="flex-1">
-                    <p className="text-sm font-medium">{notification.message}</p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">{notification.message}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       {notification.timestamp.toLocaleTimeString()}
                     </p>

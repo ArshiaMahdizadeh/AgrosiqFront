@@ -316,11 +316,11 @@ export default function CalculatorPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Save className="h-4 w-4" />
             Save Results
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
             <Download className="h-4 w-4" />
             Export PDF
           </Button>
@@ -330,19 +330,19 @@ export default function CalculatorPage() {
       {/* Calculator Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full">
-          <TabsTrigger value="roi" className="flex items-center gap-2">
+          <TabsTrigger value="roi" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <TrendingUp className="h-4 w-4" />
             ROI Calculator
           </TabsTrigger>
-          <TabsTrigger value="profitability" className="flex items-center gap-2">
+          <TabsTrigger value="profitability" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <DollarSign className="h-4 w-4" />
             Profitability
           </TabsTrigger>
-          <TabsTrigger value="breakeven" className="flex items-center gap-2">
+          <TabsTrigger value="breakeven" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <Target className="h-4 w-4" />
             Break-even
           </TabsTrigger>
-          <TabsTrigger value="export" className="flex items-center gap-2">
+          <TabsTrigger value="export" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
             <BarChart3 className="h-4 w-4" />
             Export Margin
           </TabsTrigger>
@@ -373,6 +373,7 @@ export default function CalculatorPage() {
                       initialInvestment: e.target.value
                     }))}
                     placeholder="Enter initial investment"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -386,6 +387,7 @@ export default function CalculatorPage() {
                       finalValue: e.target.value
                     }))}
                     placeholder="Enter final value"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -399,6 +401,7 @@ export default function CalculatorPage() {
                       timePeriod: e.target.value
                     }))}
                     placeholder="Enter time period"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -412,6 +415,7 @@ export default function CalculatorPage() {
                       additionalCosts: e.target.value
                     }))}
                     placeholder="Enter additional costs"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
               </CardContent>
@@ -492,6 +496,7 @@ export default function CalculatorPage() {
                       revenue: e.target.value
                     }))}
                     placeholder="Enter total revenue"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -505,6 +510,7 @@ export default function CalculatorPage() {
                       costOfGoods: e.target.value
                     }))}
                     placeholder="Enter cost of goods sold"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -518,6 +524,7 @@ export default function CalculatorPage() {
                       operatingExpenses: e.target.value
                     }))}
                     placeholder="Enter operating expenses"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -531,6 +538,7 @@ export default function CalculatorPage() {
                       units: e.target.value
                     }))}
                     placeholder="Enter units sold"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
               </CardContent>
@@ -624,6 +632,7 @@ export default function CalculatorPage() {
                       fixedCosts: e.target.value
                     }))}
                     placeholder="Enter fixed costs"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -637,6 +646,7 @@ export default function CalculatorPage() {
                       variableCostPerUnit: e.target.value
                     }))}
                     placeholder="Enter variable cost per unit"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -650,6 +660,7 @@ export default function CalculatorPage() {
                       sellingPricePerUnit: e.target.value
                     }))}
                     placeholder="Enter selling price per unit"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
               </CardContent>
@@ -747,6 +758,7 @@ export default function CalculatorPage() {
                       sellingPrice: e.target.value
                     }))}
                     placeholder="Enter selling price"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -760,6 +772,7 @@ export default function CalculatorPage() {
                       productCost: e.target.value
                     }))}
                     placeholder="Enter product cost"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -773,6 +786,7 @@ export default function CalculatorPage() {
                       shippingCost: e.target.value
                     }))}
                     placeholder="Enter shipping cost"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -786,6 +800,7 @@ export default function CalculatorPage() {
                       insuranceCost: e.target.value
                     }))}
                     placeholder="Enter insurance cost"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -799,6 +814,7 @@ export default function CalculatorPage() {
                       customsCost: e.target.value
                     }))}
                     placeholder="Enter customs cost"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -812,6 +828,7 @@ export default function CalculatorPage() {
                       marketingCost: e.target.value
                     }))}
                     placeholder="Enter marketing cost"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
                 <div className="space-y-2">
@@ -825,6 +842,7 @@ export default function CalculatorPage() {
                       units: e.target.value
                     }))}
                     placeholder="Enter number of units"
+                    className="dark:bg-gray-700 dark:text-white dark:border-gray-700"
                   />
                 </div>
               </CardContent>

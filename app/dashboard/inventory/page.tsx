@@ -189,7 +189,7 @@ export default function Inventory() {
   };
 
   return (
-    <div ref={pageRef} className="space-y-6 p-6">
+    <div ref={pageRef} className="space-y-6 p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -201,11 +201,11 @@ export default function Inventory() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <Download className="h-4 w-4" />
             Export
           </Button>
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <RefreshCcw className="h-4 w-4" />
             Refresh
           </Button>
@@ -218,7 +218,7 @@ export default function Inventory() {
 
       {/* Summary Cards */}
       <div ref={summaryRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="summary-card">
+        <Card className="summary-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Products
@@ -226,14 +226,14 @@ export default function Inventory() {
             <Package className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{inventoryData.summary.totalItems}</div>
+            <div className="text-2xl font-bold text-gray-900 dark:text-white">{inventoryData.summary.totalItems}</div>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
               Across all warehouses
             </p>
           </CardContent>
         </Card>
 
-        <Card className="summary-card">
+        <Card className="summary-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Value
@@ -241,7 +241,7 @@ export default function Inventory() {
             <BarChart2 className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-bold text-gray-900 dark:text-white">
               ${inventoryData.summary.totalValue.toLocaleString()}
             </div>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
@@ -250,7 +250,7 @@ export default function Inventory() {
           </CardContent>
         </Card>
 
-        <Card className="summary-card">
+        <Card className="summary-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Low Stock Items
@@ -267,7 +267,7 @@ export default function Inventory() {
           </CardContent>
         </Card>
 
-        <Card className="summary-card">
+        <Card className="summary-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Out of Stock
@@ -288,18 +288,18 @@ export default function Inventory() {
       {/* Warehouse Status */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {inventoryData.warehouses.map((warehouse, index) => (
-          <Card key={index} className="warehouse-card">
+          <Card key={index} className="warehouse-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
                   <Warehouse className="h-5 w-5 text-primary" />
                   {warehouse.name}
                 </CardTitle>
-                <Badge variant="outline">
+                <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300">
                   {warehouse.items} Items
                 </Badge>
               </div>
-              <CardDescription>
+              <CardDescription className="text-gray-600 dark:text-gray-400">
                 Storage capacity utilization
               </CardDescription>
             </CardHeader>
@@ -321,7 +321,7 @@ export default function Inventory() {
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -329,43 +329,43 @@ export default function Inventory() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="Search products..."
-                  className="pl-9"
+                  className="pl-9 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="Spices">Spices</SelectItem>
-                <SelectItem value="Nuts">Nuts</SelectItem>
-                <SelectItem value="Dates">Dates</SelectItem>
-                <SelectItem value="Oils">Oils</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Categories</SelectItem>
+                <SelectItem value="Spices" className="dark:hover:bg-gray-700">Spices</SelectItem>
+                <SelectItem value="Nuts" className="dark:hover:bg-gray-700">Nuts</SelectItem>
+                <SelectItem value="Dates" className="dark:hover:bg-gray-700">Dates</SelectItem>
+                <SelectItem value="Oils" className="dark:hover:bg-gray-700">Oils</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedWarehouse} onValueChange={setSelectedWarehouse}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Warehouse" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Warehouses</SelectItem>
-                <SelectItem value="Main Warehouse">Main Warehouse</SelectItem>
-                <SelectItem value="Export Center">Export Center</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Warehouses</SelectItem>
+                <SelectItem value="Main Warehouse" className="dark:hover:bg-gray-700">Main Warehouse</SelectItem>
+                <SelectItem value="Export Center" className="dark:hover:bg-gray-700">Export Center</SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-              <SelectTrigger className="w-full md:w-[180px]">
+              <SelectTrigger className="w-full md:w-[180px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="In Stock">In Stock</SelectItem>
-                <SelectItem value="Low Stock">Low Stock</SelectItem>
-                <SelectItem value="Out of Stock">Out of Stock</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all" className="dark:hover:bg-gray-700">All Status</SelectItem>
+                <SelectItem value="In Stock" className="dark:hover:bg-gray-700">In Stock</SelectItem>
+                <SelectItem value="Low Stock" className="dark:hover:bg-gray-700">Low Stock</SelectItem>
+                <SelectItem value="Out of Stock" className="dark:hover:bg-gray-700">Out of Stock</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -373,39 +373,39 @@ export default function Inventory() {
       </Card>
 
       {/* Products Table */}
-      <Card ref={tableRef}>
+      <Card ref={tableRef} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardHeader>
-          <CardTitle>Inventory Items</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-gray-900 dark:text-white">Inventory Items</CardTitle>
+          <CardDescription className="text-gray-600 dark:text-gray-400">
             Manage and track your product inventory
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>Product</TableHead>
-                <TableHead>SKU</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Warehouse</TableHead>
-                <TableHead>Stock Level</TableHead>
-                <TableHead>Value</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Last Updated</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+              <TableRow className="border-gray-200 dark:border-gray-700">
+                <TableHead className="text-gray-900 dark:text-white">Product</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">SKU</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Category</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Warehouse</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Stock Level</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Value</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Status</TableHead>
+                <TableHead className="text-gray-900 dark:text-white">Last Updated</TableHead>
+                <TableHead className="text-right text-gray-900 dark:text-white">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredProducts.map((product) => (
-                <TableRow key={product.id}>
-                  <TableCell className="font-medium">{product.name}</TableCell>
-                  <TableCell>{product.sku}</TableCell>
-                  <TableCell>{product.category}</TableCell>
-                  <TableCell>{product.warehouse}</TableCell>
+                <TableRow key={product.id} className="border-gray-200 dark:border-gray-700">
+                  <TableCell className="font-medium text-gray-900 dark:text-white">{product.name}</TableCell>
+                  <TableCell className="text-gray-600 dark:text-gray-400">{product.sku}</TableCell>
+                  <TableCell className="text-gray-600 dark:text-gray-400">{product.category}</TableCell>
+                  <TableCell className="text-gray-600 dark:text-gray-400">{product.warehouse}</TableCell>
                   <TableCell>
                     <div className="space-y-1">
                       <div className="flex justify-between text-sm">
-                        <span>{product.inStock}</span>
+                        <span className="text-gray-900 dark:text-white">{product.inStock}</span>
                         <span className="text-gray-500">/ {product.maxStock}</span>
                       </div>
                       <Progress 
@@ -414,13 +414,13 @@ export default function Inventory() {
                       />
                     </div>
                   </TableCell>
-                  <TableCell>${product.value.toLocaleString()}</TableCell>
+                  <TableCell className="text-gray-900 dark:text-white">${product.value.toLocaleString()}</TableCell>
                   <TableCell>
                     <Badge className={getStatusColor(product.status)}>
                       {product.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{product.lastUpdated}</TableCell>
+                  <TableCell className="text-gray-600 dark:text-gray-400">{product.lastUpdated}</TableCell>
                   <TableCell className="text-right">
                     <Button variant="ghost" size="icon">
                       <QrCode className="h-4 w-4" />

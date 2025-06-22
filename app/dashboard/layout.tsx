@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { 
   BarChart3, 
   DollarSign, 
@@ -88,9 +89,9 @@ const sidebarLinks = [
 
 function SidebarContent({ pathname, onClose }: { pathname: string; onClose?: () => void }) {
   return (
-    <div className="h-full flex flex-col p-6">
+    <div className="h-full flex flex-col p-6 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
       <div className="profile-section flex items-center gap-4 pb-6 border-b border-gray-200 dark:border-gray-800">
-        <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-800 overflow-hidden">
+        <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
           <img
             src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg"
             alt="Profile"
@@ -139,27 +140,49 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
       {/* Desktop Sidebar */}
-      <aside className="hidden md:block w-64 border-r border-gray-200 dark:border-gray-800">
+      <aside className="hidden md:block w-64">
         <SidebarContent pathname={pathname} />
       </aside>
 
       {/* Mobile Sidebar */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="md:hidden">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 shadow-md">
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-64 p-0">
+        <SheetContent side="left" className="w-64 p-0 bg-white dark:bg-gray-900">
           <SidebarContent pathname={pathname} onClose={() => setIsOpen(false)} />
         </SheetContent>
       </Sheet>
 
-      <main className="flex-1 overflow-auto">
-        {children}
-      </main>
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Header with Theme Toggle */}
+        <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+            <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Dashboard
+            </h1>
+          </div>
+          <ThemeToggle />
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto pb-20 md:pb-0 bg-gray-50 dark:bg-gray-900">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

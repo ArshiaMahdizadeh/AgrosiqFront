@@ -89,7 +89,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div ref={pageRef} className="space-y-8 p-6">
+    <div ref={pageRef} className="space-y-8 p-6 bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -101,21 +101,21 @@ export default function Dashboard() {
           </p>
         </div>
         <Select defaultValue="thisMonth">
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <SelectValue placeholder="Select period" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="thisMonth">This Month</SelectItem>
-            <SelectItem value="lastMonth">Last Month</SelectItem>
-            <SelectItem value="sixMonths">Last 6 Months</SelectItem>
-            <SelectItem value="year">This Year</SelectItem>
+          <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <SelectItem value="thisMonth" className="dark:hover:bg-gray-700">This Month</SelectItem>
+            <SelectItem value="lastMonth" className="dark:hover:bg-gray-700">Last Month</SelectItem>
+            <SelectItem value="sixMonths" className="dark:hover:bg-gray-700">Last 6 Months</SelectItem>
+            <SelectItem value="year" className="dark:hover:bg-gray-700">This Year</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       {/* Financial KPIs */}
       <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="dashboard-card">
+        <Card className="dashboard-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Revenue
@@ -125,20 +125,20 @@ export default function Dashboard() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">$62,000</div>
-                <div className="flex items-center text-sm text-green-600">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">$62,000</div>
+                <div className="flex items-center text-sm text-green-600 dark:text-green-400">
                   <TrendingUp className="h-4 w-4 mr-1" />
                   +12.5%
                 </div>
               </div>
-              <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+              <div className="h-12 w-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
                 <ArrowUpRight className="h-6 w-6 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="dashboard-card">
+        <Card className="dashboard-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Net Profit
@@ -148,20 +148,20 @@ export default function Dashboard() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">$18,600</div>
-                <div className="flex items-center text-sm text-green-600">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">$18,600</div>
+                <div className="flex items-center text-sm text-green-600 dark:text-green-400">
                   <TrendingUp className="h-4 w-4 mr-1" />
                   +8.2%
                 </div>
               </div>
-              <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+              <div className="h-12 w-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
                 <ArrowUpRight className="h-6 w-6 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="dashboard-card">
+        <Card className="dashboard-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Expenses
@@ -171,20 +171,20 @@ export default function Dashboard() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">$43,400</div>
-                <div className="flex items-center text-sm text-red-600">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">$43,400</div>
+                <div className="flex items-center text-sm text-red-600 dark:text-red-400">
                   <TrendingDown className="h-4 w-4 mr-1" />
                   -2.4%
                 </div>
               </div>
               <div className="h-12 w-12 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center">
-                <ArrowDownRight className="h-6 w-6 text-red-600" />
+                <ArrowDownRight className="h-6 w-6 text-red-600 dark:text-red-400" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="dashboard-card">
+        <Card className="dashboard-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Cash Flow
@@ -194,13 +194,13 @@ export default function Dashboard() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">$24,800</div>
-                <div className="flex items-center text-sm text-green-600">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">$24,800</div>
+                <div className="flex items-center text-sm text-green-600 dark:text-green-400">
                   <TrendingUp className="h-4 w-4 mr-1" />
                   +5.8%
                 </div>
               </div>
-              <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+              <div className="h-12 w-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
                 <ArrowUpRight className="h-6 w-6 text-primary" />
               </div>
             </div>
@@ -210,18 +210,25 @@ export default function Dashboard() {
 
       {/* Charts Section */}
       <div ref={chartsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="chart-container">
+        <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader>
-            <CardTitle>Revenue vs Budget</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-white">Revenue vs Budget</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                  <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: 'var(--background)',
+                      border: '1px solid var(--border)',
+                      borderRadius: '8px',
+                      color: 'var(--foreground)'
+                    }}
+                  />
                   <Legend />
                   <Line
                     type="monotone"
@@ -243,18 +250,25 @@ export default function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card className="chart-container">
+        <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader>
-            <CardTitle>Monthly Performance</CardTitle>
+            <CardTitle className="text-gray-900 dark:text-white">Monthly Performance</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={revenueData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                  <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: 'var(--background)',
+                      border: '1px solid var(--border)',
+                      borderRadius: '8px',
+                      color: 'var(--foreground)'
+                    }}
+                  />
                   <Legend />
                   <Bar dataKey="actual" name="Revenue" fill="#00796B" />
                   <Bar dataKey="budget" name="Budget" fill="#8BC34A" />
@@ -266,9 +280,9 @@ export default function Dashboard() {
       </div>
 
       {/* Alerts Section */}
-      <Card className="dashboard-card">
+      <Card className="dashboard-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
             <AlertCircle className="h-5 w-5 text-primary" />
             Recent Alerts
           </CardTitle>
@@ -285,7 +299,7 @@ export default function Dashboard() {
                   Pistachio stock is below reorder point
                 </p>
               </div>
-              <Badge variant="outline" className="ml-auto">
+              <Badge variant="outline" className="ml-auto border-yellow-300 dark:border-yellow-700 text-yellow-700 dark:text-yellow-300">
                 Inventory
               </Badge>
             </div>
@@ -300,7 +314,7 @@ export default function Dashboard() {
                   Revenue has increased 12% compared to last month
                 </p>
               </div>
-              <Badge variant="outline" className="ml-auto">
+              <Badge variant="outline" className="ml-auto border-green-300 dark:border-green-700 text-green-700 dark:text-green-300">
                 Finance
               </Badge>
             </div>

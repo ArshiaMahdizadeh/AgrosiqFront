@@ -185,12 +185,12 @@ export default function ProductRegistration() {
                     setErrors(prev => ({ ...prev, productType: "" }));
                   }}
                 >
-                  <SelectTrigger className={errors.productType ? "border-red-500" : ""}>
+                  <SelectTrigger className={errors.productType ? "border-red-500" : "dark:bg-gray-700"}>
                     <SelectValue placeholder="Select product type" />
                   </SelectTrigger>
                   <SelectContent>
                     {productOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
+                      <SelectItem key={option.value} value={option.value} className="dark:hover:bg-gray-700">
                         {option.label}
                       </SelectItem>
                     ))}
@@ -213,6 +213,7 @@ export default function ProductRegistration() {
                     }}
                     className={errors.customProduct ? "border-red-500" : ""}
                     placeholder="Enter product name"
+                    
                   />
                   {errors.customProduct && (
                     <span className="text-sm text-red-500">{errors.customProduct}</span>
@@ -229,7 +230,7 @@ export default function ProductRegistration() {
                     setFormData(prev => ({ ...prev, location: e.target.value }));
                     setErrors(prev => ({ ...prev, location: "" }));
                   }}
-                  className={errors.location ? "border-red-500" : ""}
+                  className={errors.location ? "border-red-500" : "dark:bg-gray-700 dark:text-white dark:border-gray-700"}
                   placeholder="Enter cultivation location"
                 />
                 {errors.location && (
@@ -244,7 +245,7 @@ export default function ProductRegistration() {
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full justify-start text-left font-normal",
+                        "w-full justify-start text-left font-normal dark:bg-gray-700 dark:text-white dark:border-gray-700",
                         !formData.harvestDate && "text-muted-foreground",
                         errors.harvestDate && "border-red-500"
                       )}
@@ -287,7 +288,7 @@ export default function ProductRegistration() {
                       setFormData(prev => ({ ...prev, weight: e.target.value }));
                       setErrors(prev => ({ ...prev, weight: "" }));
                     }}
-                    className={cn("flex-1", errors.weight && "border-red-500")}
+                    className={cn("flex-1 dark:bg-gray-700 dark:text-white dark:border-gray-700", errors.weight && "border-red-500")}
                     placeholder="Enter weight"
                     step="0.1"
                   />
@@ -295,12 +296,12 @@ export default function ProductRegistration() {
                     value={formData.weightUnit}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, weightUnit: value }))}
                   >
-                    <SelectTrigger className="w-[120px]">
+                    <SelectTrigger className="w-[120px] border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                       <SelectValue placeholder="Unit" />
                     </SelectTrigger>
                     <SelectContent>
                       {weightUnits.map((unit) => (
-                        <SelectItem key={unit.value} value={unit.value}>
+                        <SelectItem key={unit.value} value={unit.value} className="dark:hover:bg-gray-700">
                           {unit.label}
                         </SelectItem>
                       ))}

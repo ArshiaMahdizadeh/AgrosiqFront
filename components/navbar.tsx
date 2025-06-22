@@ -103,7 +103,7 @@ export function Navbar() {
             Verify Authenticity
           </Link>
           <div className="flex gap-2">
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="text-white bg-white/10 border-white hover:text-black hover:bg-white" asChild>
               <Link href="/sign-in">Sign In</Link>
             </Button>
             <Button variant="default" className="bg-primary hover:bg-primary-600 text-white" asChild>

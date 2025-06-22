@@ -208,7 +208,7 @@ export default function ProfilePage() {
           value={formData[id] as string}
           onChange={(e) => setFormData({ ...formData, [id]: e.target.value })}
           disabled={!isEditing}
-          className={`pl-9 ${errors[id] ? "border-red-500" : ""}`}
+          className={`pl-9 ${errors[id] ? "border-red-500" : "dark:bg-gray-700 dark:text-white dark:border-gray-700"}`}
         />
       </div>
       {errors[id] && <p className="text-sm text-red-500">{errors[id]}</p>}
@@ -281,7 +281,7 @@ export default function ProfilePage() {
                 size="icon"
                 variant="outline"
                 className={`absolute bottom-0 right-0 rounded-full w-8 h-8 ${
-                  !isEditing ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-300"
+                  !isEditing ? "opacity-50 cursor-not-allowed" : "border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                 }`}
                 onClick={triggerFileInput}
                 disabled={!isEditing}
@@ -324,12 +324,12 @@ export default function ProfilePage() {
                 }
                 disabled={!isEditing}
               >
-                <SelectTrigger>
+                <SelectTrigger className="dark:bg-gray-700 dark:text-white dark:border-gray-700">
                   <SelectValue placeholder="Select account type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="farmer">Farmer</SelectItem>
-                  <SelectItem value="exporter">Exporter</SelectItem>
+                  <SelectItem value="farmer" className="dark:hover:bg-gray-700">Farmer</SelectItem>
+                  <SelectItem value="exporter" className="dark:hover:bg-gray-700">Exporter</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -338,7 +338,7 @@ export default function ProfilePage() {
         <CardFooter className="flex justify-between">
           {isEditing ? (
             <>
-              <Button variant="outline" onClick={handleCancelEdit}>
+              <Button variant="outline" className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200" onClick={handleCancelEdit}>
                 Cancel
               </Button>
               <Button onClick={handleSave} disabled={isSaving}>
@@ -371,7 +371,7 @@ export default function ProfilePage() {
             {/* Security Section */}
             <div className="space-y-4">
               <Label>Security</Label>
-              <div className="flex items-center justify-between p-4 border rounded-lg bg-background">
+              <div className="flex items-center justify-between p-4 border rounded-lg bg-background border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300">
                 <div className="flex items-center gap-3">
                   <Shield className="h-5 w-5 text-gray-500" />
                   <div>
@@ -395,7 +395,7 @@ export default function ProfilePage() {
             {/* Notifications Section */}
             <div className="space-y-4">
               <Label>Notifications</Label>
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
+              <div className="space-y-4 p-4 border rounded-lg bg-background border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300">
                 {renderNotificationToggle("market", "Market Updates")}
                 {renderNotificationToggle("documents", "Document Notifications")}
                 {renderNotificationToggle("products", "Product Updates")}
@@ -413,7 +413,7 @@ export default function ProfilePage() {
                 </div>
                 <Badge variant="secondary">Free</Badge>
               </div>
-              <Button className="w-full mt-4" variant="outline">
+              <Button className="w-full mt-4 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200" variant="outline">
                 Upgrade Plan
               </Button>
             </div>
