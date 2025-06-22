@@ -359,23 +359,23 @@ export default function AnalyticsPage() {
       {/* Analytics Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsList className="grid grid-cols-2 lg:grid-cols-5 w-full">
-          <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <BarChart3 className="h-4 w-4" />
             Overview
           </TabsTrigger>
-          <TabsTrigger value="products" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="products" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <Package className="h-4 w-4" />
             Products
           </TabsTrigger>
-          <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="regions" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <Globe className="h-4 w-4" />
             Regions
           </TabsTrigger>
-          <TabsTrigger value="competitive" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="competitive" className="flex items-center data-[state=active]:bg-primary data-[state=active]:text-white">
             <Target className="h-4 w-4" />
             Competitive
           </TabsTrigger>
-          <TabsTrigger value="forecast" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="forecast" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <TrendingUp className="h-4 w-4" />
             Forecast
           </TabsTrigger>

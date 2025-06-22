@@ -330,19 +330,19 @@ export default function CalculatorPage() {
       {/* Calculator Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
         <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full">
-          <TabsTrigger value="roi" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="roi" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <TrendingUp className="h-4 w-4" />
             ROI Calculator
           </TabsTrigger>
-          <TabsTrigger value="profitability" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="profitability" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <DollarSign className="h-4 w-4" />
             Profitability
           </TabsTrigger>
-          <TabsTrigger value="breakeven" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="breakeven" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <Target className="h-4 w-4" />
             Break-even
           </TabsTrigger>
-          <TabsTrigger value="export" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300">
+          <TabsTrigger value="export" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <BarChart3 className="h-4 w-4" />
             Export Margin
           </TabsTrigger>

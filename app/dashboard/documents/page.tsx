@@ -470,7 +470,7 @@ export default function DocumentManagement() {
                           <Button 
                             variant="outline" 
                             size="sm" 
-                            className="flex-1 text-xs px-2 py-1 h-8 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
+                            className="flex-1 text-xs px-2 py-1 h-8 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-red-700 hover:text-gray-900 dark:hover:text-gray-200"
                           >
                             <Trash2 className="h-3.5 w-3.5 mr-1.5" />
                             Delete

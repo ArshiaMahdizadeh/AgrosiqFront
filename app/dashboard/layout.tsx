@@ -20,6 +20,7 @@ import {
   QrCode,
   Calculator,
   TrendingUp,
+  Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -44,6 +45,11 @@ const sidebarLinks = [
     title: "Inventory",
     href: "/dashboard/inventory",
     icon: Package,
+  },
+  {
+    title: "Shipping",
+    href: "/dashboard/shipping",
+    icon: Truck,
   },
   {
     title: "Realtime",
