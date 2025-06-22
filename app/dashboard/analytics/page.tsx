@@ -67,6 +67,7 @@ import {
   MapPin,
   Award,
 } from "lucide-react";
+import { Chatbot } from "@/components/ui/chatbot";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -169,7 +170,8 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <div ref={pageRef} className="space-y-6 p-6">
+    <>
+    <div ref={pageRef} className="space-y-6 p-6 bg-gray-50 dark:bg-gray-900 min-h-screen relative p-4">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -182,21 +184,21 @@ export default function AnalyticsPage() {
         </div>
         <div className="flex items-center gap-2">
           <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-            <SelectTrigger className="w-[140px] border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+            <SelectTrigger className="w-[140px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <SelectValue placeholder="Period" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1month" className="dark:hover:bg-gray-700">Last Month</SelectItem>
-              <SelectItem value="3months" className="dark:hover:bg-gray-700">Last 3 Months</SelectItem>
-              <SelectItem value="6months" className="dark:hover:bg-gray-700">Last 6 Months</SelectItem>
-              <SelectItem value="1year" className="dark:hover:bg-gray-700">Last Year</SelectItem>
+            <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+              <SelectItem value="1month">Last Month</SelectItem>
+              <SelectItem value="3months">Last 3 Months</SelectItem>
+              <SelectItem value="6months">Last 6 Months</SelectItem>
+              <SelectItem value="1year">Last Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
-          <Button variant="outline" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+          <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
             <Download className="h-4 w-4" />
             Export
           </Button>
@@ -205,7 +207,7 @@ export default function AnalyticsPage() {
 
       {/* KPI Cards */}
       <div ref={kpiRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="kpi-card">
+        <Card className="kpi-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Revenue
@@ -215,11 +217,11 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   ${analyticsData.kpis.totalRevenue.value.toLocaleString()}
                 </div>
                 <div className={`flex items-center text-sm ${
-                  analyticsData.kpis.totalRevenue.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.totalRevenue.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`}>
                   {analyticsData.kpis.totalRevenue.trend === "up" ? (
                     <TrendingUp className="h-4 w-4 mr-1" />
@@ -235,14 +237,14 @@ export default function AnalyticsPage() {
                   : "bg-red-100 dark:bg-red-900/20"
               }`}>
                 <ArrowUpRight className={`h-6 w-6 ${
-                  analyticsData.kpis.totalRevenue.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.totalRevenue.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`} />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="kpi-card">
+        <Card className="kpi-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Export Volume
@@ -252,11 +254,11 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   {analyticsData.kpis.exportVolume.value.toLocaleString()} tons
                 </div>
                 <div className={`flex items-center text-sm ${
-                  analyticsData.kpis.exportVolume.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.exportVolume.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`}>
                   {analyticsData.kpis.exportVolume.trend === "up" ? (
                     <TrendingUp className="h-4 w-4 mr-1" />
@@ -272,14 +274,14 @@ export default function AnalyticsPage() {
                   : "bg-red-100 dark:bg-red-900/20"
               }`}>
                 <ArrowUpRight className={`h-6 w-6 ${
-                  analyticsData.kpis.exportVolume.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.exportVolume.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`} />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="kpi-card">
+        <Card className="kpi-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Active Markets
@@ -289,11 +291,11 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   {analyticsData.kpis.activeMarkets.value}
                 </div>
                 <div className={`flex items-center text-sm ${
-                  analyticsData.kpis.activeMarkets.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.activeMarkets.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`}>
                   {analyticsData.kpis.activeMarkets.trend === "up" ? (
                     <TrendingUp className="h-4 w-4 mr-1" />
@@ -309,14 +311,14 @@ export default function AnalyticsPage() {
                   : "bg-red-100 dark:bg-red-900/20"
               }`}>
                 <ArrowUpRight className={`h-6 w-6 ${
-                  analyticsData.kpis.activeMarkets.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.activeMarkets.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`} />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="kpi-card">
+        <Card className="kpi-card bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Customer Retention
@@ -326,11 +328,11 @@ export default function AnalyticsPage() {
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   {analyticsData.kpis.customerRetention.value}%
                 </div>
                 <div className={`flex items-center text-sm ${
-                  analyticsData.kpis.customerRetention.trend === "up" ? "text-green-600" : "text-red-600"
+                  analyticsData.kpis.customerRetention.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
                 }`}>
                   {analyticsData.kpis.customerRetention.trend === "up" ? (
                     <TrendingUp className="h-4 w-4 mr-1" />
@@ -346,9 +348,9 @@ export default function AnalyticsPage() {
                   : "bg-red-100 dark:bg-red-900/20"
               }`}>
                 {analyticsData.kpis.customerRetention.trend === "up" ? (
-                  <ArrowUpRight className="h-6 w-6 text-green-600" />
+                  <ArrowUpRight className="h-6 w-6 text-green-600 dark:text-green-400" />
                 ) : (
-                  <ArrowDownRight className="h-6 w-6 text-red-600" />
+                  <ArrowDownRight className="h-6 w-6 text-red-600 dark:text-red-400" />
                 )}
               </div>
             </div>
@@ -358,7 +360,7 @@ export default function AnalyticsPage() {
 
       {/* Analytics Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid grid-cols-2 lg:grid-cols-5 w-full">
+        <TabsList className="grid grid-cols-2 lg:grid-cols-5 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <TabsTrigger value="overview" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <BarChart3 className="h-4 w-4" />
             Overview
@@ -371,7 +373,7 @@ export default function AnalyticsPage() {
             <Globe className="h-4 w-4" />
             Regions
           </TabsTrigger>
-          <TabsTrigger value="competitive" className="flex items-center data-[state=active]:bg-primary data-[state=active]:text-white">
+          <TabsTrigger value="competitive" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <Target className="h-4 w-4" />
             Competitive
           </TabsTrigger>
@@ -384,20 +386,27 @@ export default function AnalyticsPage() {
         {/* Overview Tab */}
         <TabsContent value="overview">
           <div ref={chartsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Revenue & Volume Trends</CardTitle>
-                <CardDescription>Monthly performance over the last 6 months</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Revenue & Volume Trends</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Monthly performance over the last 6 months</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={analyticsData.monthlyTrends}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis yAxisId="left" orientation="left" />
-                      <YAxis yAxisId="right" orientation="right" />
-                      <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                      <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis yAxisId="left" orientation="left" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis yAxisId="right" orientation="right" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                       <Legend />
                       <Line
                         yAxisId="left"
@@ -422,19 +431,26 @@ export default function AnalyticsPage() {
               </CardContent>
             </Card>
 
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Customer Growth</CardTitle>
-                <CardDescription>Active customer base expansion</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Customer Growth</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Active customer base expansion</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={analyticsData.monthlyTrends}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                      <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                       <Area
                         type="monotone"
                         dataKey="customers"
@@ -454,10 +470,10 @@ export default function AnalyticsPage() {
         {/* Products Tab */}
         <TabsContent value="products">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Product Performance</CardTitle>
-                <CardDescription>Revenue distribution by product category</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Product Performance</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Revenue distribution by product category</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
@@ -477,26 +493,40 @@ export default function AnalyticsPage() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Product Growth Rates</CardTitle>
-                <CardDescription>Year-over-year growth by product</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Product Growth Rates</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Year-over-year growth by product</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={analyticsData.productPerformance}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                      <XAxis dataKey="name" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                       <Bar dataKey="growth" name="Growth %" fill="#00796B" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -506,28 +536,28 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Product Details Table */}
-          <Card className="chart-container mt-6">
+          <Card className="chart-container mt-6 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
             <CardHeader>
-              <CardTitle>Detailed Product Analytics</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-white">Detailed Product Analytics</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {analyticsData.productPerformance.map((product, index) => (
-                  <div key={product.name} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div key={product.name} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="flex items-center gap-4">
                       <div className={`w-4 h-4 rounded-full`} style={{ backgroundColor: COLORS[index] }} />
                       <div>
-                        <h4 className="font-medium">{product.name}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-white">{product.name}</h4>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                           {product.value}% market share
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold">${product.revenue.toLocaleString()}</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">${product.revenue.toLocaleString()}</p>
                       <div className="flex items-center gap-1">
-                        <TrendingUp className="h-4 w-4 text-green-600" />
-                        <span className="text-sm text-green-600">{product.growth}%</span>
+                        <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        <span className="text-sm text-green-600 dark:text-green-400">{product.growth}%</span>
                       </div>
                     </div>
                   </div>
@@ -540,19 +570,26 @@ export default function AnalyticsPage() {
         {/* Regions Tab */}
         <TabsContent value="regions">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Regional Revenue Distribution</CardTitle>
-                <CardDescription>Revenue performance by geographic region</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Regional Revenue Distribution</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Revenue performance by geographic region</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={analyticsData.regionalAnalysis}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="region" />
-                      <YAxis />
-                      <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                      <XAxis dataKey="region" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                       <Bar dataKey="revenue" name="Revenue ($)" fill="#00796B" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -560,19 +597,26 @@ export default function AnalyticsPage() {
               </CardContent>
             </Card>
 
-            <Card className="chart-container">
+            <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
               <CardHeader>
-                <CardTitle>Regional Growth Rates</CardTitle>
-                <CardDescription>Year-over-year growth by region</CardDescription>
+                <CardTitle className="text-gray-900 dark:text-white">Regional Growth Rates</CardTitle>
+                <CardDescription className="text-gray-600 dark:text-gray-400">Year-over-year growth by region</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-[350px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={analyticsData.regionalAnalysis}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="region" />
-                      <YAxis />
-                      <Tooltip />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                      <XAxis dataKey="region" stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'var(--background)',
+                          border: '1px solid var(--border)',
+                          borderRadius: '8px',
+                          color: 'var(--foreground)'
+                        }}
+                      />
                       <Bar dataKey="growth" name="Growth %" fill="#8BC34A" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -582,33 +626,33 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Regional Details */}
-          <Card className="chart-container mt-6">
+          <Card className="chart-container mt-6 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
             <CardHeader>
-              <CardTitle>Regional Performance Summary</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-white">Regional Performance Summary</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {analyticsData.regionalAnalysis.map((region) => (
-                  <div key={region.region} className="p-4 border rounded-lg">
+                  <div key={region.region} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-700">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-semibold flex items-center gap-2">
+                      <h4 className="font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
                         <MapPin className="h-4 w-4 text-primary" />
                         {region.region}
                       </h4>
-                      <Badge variant="outline">{region.countries} countries</Badge>
+                      <Badge variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300">{region.countries} countries</Badge>
                     </div>
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span className="text-sm text-gray-600 dark:text-gray-400">Revenue:</span>
-                        <span className="font-medium">${region.revenue.toLocaleString()}</span>
+                        <span className="font-medium text-gray-900 dark:text-white">${region.revenue.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-sm text-gray-600 dark:text-gray-400">Volume:</span>
-                        <span className="font-medium">{region.volume.toLocaleString()} tons</span>
+                        <span className="font-medium text-gray-900 dark:text-white">{region.volume.toLocaleString()} tons</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-sm text-gray-600 dark:text-gray-400">Growth:</span>
-                        <span className="font-medium text-green-600">+{region.growth}%</span>
+                        <span className="font-medium text-green-600 dark:text-green-400">+{region.growth}%</span>
                       </div>
                     </div>
                   </div>
@@ -620,18 +664,18 @@ export default function AnalyticsPage() {
 
         {/* Competitive Tab */}
         <TabsContent value="competitive">
-          <Card className="chart-container">
+          <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
             <CardHeader>
-              <CardTitle>Competitive Analysis</CardTitle>
-              <CardDescription>Performance comparison with key competitors</CardDescription>
+              <CardTitle className="text-gray-900 dark:text-white">Competitive Analysis</CardTitle>
+              <CardDescription className="text-gray-600 dark:text-gray-400">Performance comparison with key competitors</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={analyticsData.competitiveAnalysis}>
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="metric" />
-                    <PolarRadiusAxis />
+                    <PolarGrid stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                    <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
+                    <PolarRadiusAxis tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
                     <Radar
                       name="Our Company"
                       dataKey="us"
@@ -663,19 +707,26 @@ export default function AnalyticsPage() {
 
         {/* Forecast Tab */}
         <TabsContent value="forecast">
-          <Card className="chart-container">
+          <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
             <CardHeader>
-              <CardTitle>Revenue Forecast</CardTitle>
-              <CardDescription>Predictive analytics for the next 6 months</CardDescription>
+              <CardTitle className="text-gray-900 dark:text-white">Revenue Forecast</CardTitle>
+              <CardDescription className="text-gray-600 dark:text-gray-400">Predictive analytics for the next 6 months</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={analyticsData.forecastData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
+                    <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
+                    <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
+                    <Tooltip 
+                      contentStyle={{
+                        backgroundColor: 'var(--background)',
+                        border: '1px solid var(--border)',
+                        borderRadius: '8px',
+                        color: 'var(--foreground)'
+                      }}
+                    />
                     <Legend />
                     <Line
                       type="monotone"
@@ -702,25 +753,25 @@ export default function AnalyticsPage() {
       </Tabs>
 
       {/* Report Generation Section */}
-      <Card className="chart-container">
+      <Card className="chart-container bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
             <FileText className="h-5 w-5 text-primary" />
             Report Generation
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-gray-600 dark:text-gray-400">
             Generate comprehensive analytics reports in multiple formats
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-4">
-              <h4 className="font-medium">Report Type</h4>
+              <h4 className="font-medium text-gray-900 dark:text-white">Report Type</h4>
               <Select defaultValue="performance">
-                <SelectTrigger className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+                <SelectTrigger className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                   <SelectValue placeholder="Select report type" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <SelectItem value="performance" className="dark:hover:bg-gray-700">Performance Report</SelectItem>
                   <SelectItem value="market" className="dark:hover:bg-gray-700">Market Analysis</SelectItem>
                   <SelectItem value="financial" className="dark:hover:bg-gray-700">Financial Report</SelectItem>
@@ -730,12 +781,12 @@ export default function AnalyticsPage() {
             </div>
             
             <div className="space-y-4">
-              <h4 className="font-medium">Format</h4>
+              <h4 className="font-medium text-gray-900 dark:text-white">Format</h4>
               <Select defaultValue="pdf">
-                <SelectTrigger className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+                <SelectTrigger className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
                   <SelectValue placeholder="Select format" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <SelectItem value="pdf" className="dark:hover:bg-gray-700">PDF Report</SelectItem>
                   <SelectItem value="excel" className="dark:hover:bg-gray-700">Excel Spreadsheet</SelectItem>
                   <SelectItem value="powerpoint" className="dark:hover:bg-gray-700">PowerPoint Presentation</SelectItem>
@@ -744,21 +795,28 @@ export default function AnalyticsPage() {
             </div>
             
             <div className="space-y-4">
-              <h4 className="font-medium">Actions</h4>
-              <div className="flex gap-2">
-                <Button className="flex-1">
-                  <Download className="h-4 w-4 mr-2" />
-                  Generate
-                </Button>
-                <Button variant="outline" className="border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
-              </div>
-            </div>
+  <h4 className="font-medium text-gray-900 dark:text-white">Actions</h4>
+  <div className="flex flex-wrap gap-2 min-w-0">
+    <Button className="flex-1 min-w-[140px] bg-primary hover:bg-primary-600 text-white">
+      <Download className="h-4 w-4 mr-2" />
+      Generate
+    </Button>
+    <Button
+      variant="outline"
+      className="flex-1 min-w-[140px] bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white"
+    >
+      <Share2 className="h-4 w-4 mr-2" />
+      Share
+    </Button>
+  </div>
+</div>
+
           </div>
         </CardContent>
       </Card>
-    </div>
+  </div>
+    {/* Chatbot Component */}
+    <Chatbot />
+    </>
   );
 }

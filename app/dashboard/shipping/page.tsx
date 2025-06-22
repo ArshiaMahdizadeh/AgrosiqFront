@@ -316,7 +316,7 @@ export default function ShippingPage() {
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
-          <Button className="flex items-center gap-2 bg-primary hover:bg-primary-600">
+          <Button className="flex items-center gap-2 bg-primary hover:bg-primary-600 text-white">
             <Plus className="h-4 w-4" />
             New Shipment
           </Button>
@@ -689,7 +689,7 @@ export default function ShippingPage() {
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
                   Choose a shipment from the list to view detailed tracking information
                 </p>
-                <Button onClick={() => setActiveTab("shipments")}>
+                <Button className="text-white" onClick={() => setActiveTab("shipments")}>
                   View Shipments
                 </Button>
               </CardContent>
