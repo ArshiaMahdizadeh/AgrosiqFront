@@ -290,14 +290,14 @@ export default function DocumentManagement() {
       </div>
 
       {/* Upload Section */}
-      <Card className="border-dashed">
+      <Card className="border-dashed bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardContent className="p-6">
           <div
             ref={dropZoneRef}
             className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
               isDragging
                 ? "border-primary bg-primary/5"
-                : "border-gray-200 dark:border-gray-800"
+                : "border-gray-200 dark:border-gray-600"
             }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -360,7 +360,7 @@ export default function DocumentManagement() {
       </Card>
 
       {/* Filters */}
-      <Card>
+      <Card className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -407,7 +407,7 @@ export default function DocumentManagement() {
         <div ref={sliderRef} className="keen-slider">
           {filteredDocuments.map((doc) => (
             <div key={doc.id} className="keen-slider__slide h-full">
-              <Card className="h-full flex flex-col">
+              <Card className="h-full flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
@@ -517,10 +517,7 @@ export default function DocumentManagement() {
               variant="outline"
               size="icon"
               onClick={() => instanceRef.current?.next()}
-              disabled={
-                currentSlide ===
-                instanceRef.current?.track.details.slides.length - 1
-              }
+              disabled={currentSlide >= instanceRef.current?.track.details.maxIdx}
               className="rounded-full border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
             >
               <ChevronRight className="h-4 w-4" />

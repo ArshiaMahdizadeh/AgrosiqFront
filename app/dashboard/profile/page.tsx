@@ -251,7 +251,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Profile Information Card */}
-      <Card className="profile-card">
+      <Card className="profile-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardHeader>
           <CardTitle>Personal Information</CardTitle>
           <CardDescription>
@@ -359,7 +359,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* Security & Settings Card */}
-      <Card className="profile-card">
+      <Card className="profile-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardHeader>
           <CardTitle>Security & Preferences</CardTitle>
           <CardDescription>
@@ -422,9 +422,9 @@ export default function ProfilePage() {
       </Card>
 
       {/* Danger Zone Card */}
-      <Card className="profile-card border-destructive/20">
+      <Card className="profile-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardHeader>
-          <CardTitle className="text-destructive">Danger Zone</CardTitle>
+          <CardTitle>Danger Zone</CardTitle>
         </CardHeader>
         <CardContent>
           <AlertDialog>

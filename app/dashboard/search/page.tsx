@@ -194,7 +194,7 @@ export default function SearchPage() {
       </div>
 
       {/* Search Section */}
-      <Card ref={searchRef} className="border-none shadow-md">
+      <Card ref={searchRef} className="border-none shadow-md shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
         <CardContent className="p-4 space-y-4">
           {/* Main Search */}
           <div className="flex flex-col md:flex-row gap-4">
@@ -353,7 +353,7 @@ export default function SearchPage() {
   {searchResults.map((result) => (
     <Card
       key={result.id}
-      className="search-result hover:shadow-md transition-shadow overflow-hidden"
+      className="search-result hover:shadow-md transition-shadow overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
     >
       <CardContent className="p-4">
         <div className="flex flex-col sm:flex-row sm:items-start gap-4">

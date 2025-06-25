@@ -166,7 +166,7 @@ export default function ProductRegistration() {
         </div>
       </div>
 
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-2xl mx-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
         <CardHeader>
           <CardTitle>Product Information</CardTitle>
           <CardDescription>
@@ -185,7 +185,7 @@ export default function ProductRegistration() {
                     setErrors(prev => ({ ...prev, productType: "" }));
                   }}
                 >
-                  <SelectTrigger className={errors.productType ? "border-red-500" : "dark:bg-gray-700"}>
+                  <SelectTrigger className={cn("flex-1 dark:bg-gray-700 dark:text-white dark:border-gray-700", errors.productType && "border-red-500")}>
                     <SelectValue placeholder="Select product type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -211,7 +211,7 @@ export default function ProductRegistration() {
                       setFormData(prev => ({ ...prev, customProduct: e.target.value }));
                       setErrors(prev => ({ ...prev, customProduct: "" }));
                     }}
-                    className={errors.customProduct ? "border-red-500" : ""}
+                    className={cn("flex-1 dark:bg-gray-700 dark:text-white dark:border-gray-700", errors.customProduct && "border-red-500")}
                     placeholder="Enter product name"
                     
                   />
@@ -230,7 +230,7 @@ export default function ProductRegistration() {
                     setFormData(prev => ({ ...prev, location: e.target.value }));
                     setErrors(prev => ({ ...prev, location: "" }));
                   }}
-                  className={errors.location ? "border-red-500" : "dark:bg-gray-700 dark:text-white dark:border-gray-700"}
+                  className={cn("flex-1 dark:bg-gray-700 dark:text-white dark:border-gray-700", errors.location && "border-red-500")}
                   placeholder="Enter cultivation location"
                 />
                 {errors.location && (

@@ -188,10 +188,10 @@ export default function AnalyticsPage() {
               <SelectValue placeholder="Period" />
             </SelectTrigger>
             <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-              <SelectItem value="1month">Last Month</SelectItem>
-              <SelectItem value="3months">Last 3 Months</SelectItem>
-              <SelectItem value="6months">Last 6 Months</SelectItem>
-              <SelectItem value="1year">Last Year</SelectItem>
+              <SelectItem value="1month" className="dark:hover:bg-gray-700">Last Month</SelectItem>
+              <SelectItem value="3months" className="dark:hover:bg-gray-700">Last 3 Months</SelectItem>
+              <SelectItem value="6months" className="dark:hover:bg-gray-700">Last 6 Months</SelectItem>
+              <SelectItem value="1year" className="dark:hover:bg-gray-700">Last Year</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white">
@@ -444,12 +444,18 @@ export default function AnalyticsPage() {
                       <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                       <Area
                         type="monotone"
@@ -493,13 +499,19 @@ export default function AnalyticsPage() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+                      <Tooltip
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -519,14 +531,21 @@ export default function AnalyticsPage() {
                       <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" className="dark:stroke-gray-600" />
                       <XAxis dataKey="name" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
-                      <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
-                      />
+                      <Tooltip
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
+/>
+  
                       <Bar dataKey="growth" name="Growth %" fill="#00796B" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -583,12 +602,18 @@ export default function AnalyticsPage() {
                       <XAxis dataKey="region" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                       <Bar dataKey="revenue" name="Revenue ($)" fill="#00796B" />
                     </BarChart>
@@ -610,12 +635,18 @@ export default function AnalyticsPage() {
                       <XAxis dataKey="region" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                       <Bar dataKey="growth" name="Growth %" fill="#8BC34A" />
                     </BarChart>
@@ -674,8 +705,8 @@ export default function AnalyticsPage() {
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={analyticsData.competitiveAnalysis}>
                     <PolarGrid stroke="#e5e7eb" className="dark:stroke-gray-600" />
-                    <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
-                    <PolarRadiusAxis tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
+                    <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} />
+                    <PolarRadiusAxis tick={{ fill: '#6b7280' }} />
                     <Radar
                       name="Our Company"
                       dataKey="us"

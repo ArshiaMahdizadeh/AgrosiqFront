@@ -262,12 +262,18 @@ export default function Dashboard() {
                   <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
                   <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                   <Tooltip 
-                    contentStyle={{
-                      backgroundColor: 'var(--background)',
-                      border: '1px solid var(--border)',
-                      borderRadius: '8px',
-                      color: 'var(--foreground)'
-                    }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                   />
                   <Legend />
                   <Bar dataKey="actual" name="Revenue" fill="#00796B" />

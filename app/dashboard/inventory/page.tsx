@@ -422,7 +422,7 @@ export default function Inventory() {
                   </TableCell>
                   <TableCell className="text-gray-600 dark:text-gray-400">{product.lastUpdated}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="icon">
+                    <Button className="dark:hover:bg-gray-700" variant="ghost" size="icon">
                       <QrCode className="h-4 w-4" />
                     </Button>
                   </TableCell>

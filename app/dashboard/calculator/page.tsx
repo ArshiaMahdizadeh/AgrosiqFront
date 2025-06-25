@@ -329,7 +329,7 @@ export default function CalculatorPage() {
 
       {/* Calculator Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full">
+        <TabsList className="grid grid-cols-2 lg:grid-cols-4 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
           <TabsTrigger value="roi" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white">
             <TrendingUp className="h-4 w-4" />
             ROI Calculator
@@ -351,7 +351,7 @@ export default function CalculatorPage() {
         {/* ROI Calculator */}
         <TabsContent value="roi">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5 text-primary" />
@@ -421,27 +421,27 @@ export default function CalculatorPage() {
               </CardContent>
             </Card>
 
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle>ROI Analysis Results</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Total Return</p>
                     <p className="text-xl font-bold">
                       ${roiResult.totalReturn.toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">ROI</p>
                     <p className="text-xl font-bold">{roiResult.roi.toFixed(2)}%</p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Annualized ROI</p>
                     <p className="text-xl font-bold">{roiResult.annualizedROI.toFixed(2)}%</p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Status</p>
                     <div className="flex items-center gap-2">
                       {getStatusIcon(roiResult.status)}
@@ -474,7 +474,7 @@ export default function CalculatorPage() {
         {/* Profitability Calculator */}
         <TabsContent value="profitability">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <PieChart className="h-5 w-5 text-primary" />
@@ -544,29 +544,29 @@ export default function CalculatorPage() {
               </CardContent>
             </Card>
 
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle>Profitability Results</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Gross Profit</p>
                     <p className="text-xl font-bold">
                       ${profitabilityResult.grossProfit.toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Net Profit</p>
                     <p className="text-xl font-bold">
                       ${profitabilityResult.netProfit.toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Gross Margin</p>
                     <p className="text-xl font-bold">{profitabilityResult.grossMargin.toFixed(2)}%</p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Net Margin</p>
                     <p className="text-xl font-bold">{profitabilityResult.netMargin.toFixed(2)}%</p>
                   </div>
@@ -610,7 +610,7 @@ export default function CalculatorPage() {
         {/* Break-even Calculator */}
         <TabsContent value="breakeven">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="h-5 w-5 text-primary" />
@@ -666,31 +666,31 @@ export default function CalculatorPage() {
               </CardContent>
             </Card>
 
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle>Break-even Results</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Break-even Units</p>
                     <p className="text-xl font-bold">
                       {Math.round(breakEvenResult.breakEvenUnits).toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Break-even Revenue</p>
                     <p className="text-xl font-bold">
                       ${breakEvenResult.breakEvenRevenue.toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Contribution Margin</p>
                     <p className="text-xl font-bold">
                       ${breakEvenResult.contributionMargin.toFixed(2)}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Margin Ratio</p>
                     <p className="text-xl font-bold">
                       {breakEvenResult.contributionMarginRatio.toFixed(2)}%
@@ -736,7 +736,7 @@ export default function CalculatorPage() {
         {/* Export Margin Calculator */}
         <TabsContent value="export">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-primary" />
@@ -848,31 +848,31 @@ export default function CalculatorPage() {
               </CardContent>
             </Card>
 
-            <Card className="calculator-card">
+            <Card className="calculator-card shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <CardTitle>Export Margin Results</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Total Costs per Unit</p>
                     <p className="text-xl font-bold">
                       ${exportResult.totalCosts.toFixed(2)}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Profit per Unit</p>
                     <p className="text-xl font-bold">
                       ${exportResult.profitPerUnit.toFixed(2)}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Total Export Margin</p>
                     <p className="text-xl font-bold">
                       ${exportResult.exportMargin.toLocaleString()}
                     </p>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-500 dark:text-gray-400">Margin Percentage</p>
                     <p className="text-xl font-bold">
                       {exportResult.marginPercentage.toFixed(2)}%
@@ -880,7 +880,7 @@ export default function CalculatorPage() {
                   </div>
                 </div>
 
-                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-gray-500 dark:text-gray-400">Export Profitability</span>
                     <div className="flex items-center gap-2">

@@ -202,7 +202,7 @@ export default function ProductAuthenticity() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Scanner Section */}
-        <Card ref={scannerRef} className="shadow-md">
+        <Card ref={scannerRef} className="shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <QrCode className="h-5 w-5 text-primary" />
@@ -271,7 +271,7 @@ export default function ProductAuthenticity() {
               <div className="relative">
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[1px] bg-gray-200 dark:bg-gray-800" />
                 <div className="relative flex justify-center">
-                  <span className="bg-white dark:bg-gray-900 px-2 text-sm text-gray-500">
+                  <span className="bg-white px-2 text-sm text-gray-500 dark:text-gray-400 dark:bg-gray-800">
                     or enter product ID manually
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export default function ProductAuthenticity() {
 
         {/* Product Information */}
         {product && (
-          <Card ref={resultRef} className="shadow-md">
+          <Card ref={resultRef} className="shadow-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div>
@@ -414,15 +414,15 @@ export default function ProductAuthenticity() {
 
               {/* Action Buttons */}
               <div className="flex gap-2 pt-4">
-                <Button variant="outline" className="flex-1">
-                  <FileText className="h-4 w-4 mr-2" />
+                <Button variant="outline" className="flex-1 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+                  <FileText className="h-4 w-4 mr-2 " />
                   Full Report
                 </Button>
-                <Button variant="outline" className="flex-1">
+                <Button variant="outline" className="flex-1 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <Share2 className="h-4 w-4 mr-2" />
                   Share
                 </Button>
-                <Button variant="outline" className="flex-1">
+                <Button variant="outline" className="flex-1 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <RefreshCcw className="h-4 w-4 mr-2" />
                   Verify Again
                 </Button>

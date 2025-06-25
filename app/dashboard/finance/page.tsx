@@ -410,12 +410,18 @@ export default function FinancePage() {
                       <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                       <Legend />
                       <Bar dataKey="revenue" name="Revenue" fill="#00796B" />
@@ -455,12 +461,18 @@ export default function FinancePage() {
                         ))}
                       </Pie>
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.75)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -512,12 +524,18 @@ export default function FinancePage() {
                     <XAxis dataKey="month" stroke="#6b7280" className="dark:stroke-gray-400" />
                     <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                     <Tooltip 
-                      contentStyle={{
-                        backgroundColor: 'var(--background)',
-                        border: '1px solid var(--border)',
-                        borderRadius: '8px',
-                        color: 'var(--foreground)'
-                      }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                     />
                     <Legend />
                     <Area
@@ -568,12 +586,18 @@ export default function FinancePage() {
                       <XAxis dataKey="category" stroke="#6b7280" className="dark:stroke-gray-400" />
                       <YAxis stroke="#6b7280" className="dark:stroke-gray-400" />
                       <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'var(--background)',
-                          border: '1px solid var(--border)',
-                          borderRadius: '8px',
-                          color: 'var(--foreground)'
-                        }}
+  contentStyle={{
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    border: '1px solid #4B5563',
+    borderRadius: '8px',
+    color: '#F9FAFB'
+  }}
+  itemStyle={{
+    color: '#F9FAFB',
+  }}
+  labelStyle={{
+    color: '#F9FAFB',
+  }}
                       />
                       <Legend />
                       <Bar dataKey="budgeted" name="Budgeted" fill="#00796B" />

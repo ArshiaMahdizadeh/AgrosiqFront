@@ -340,8 +340,8 @@ export default function Competitors() {
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={performanceData}>
                   <PolarGrid stroke="#e5e7eb" className="dark:stroke-gray-600" />
-                  <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
-                  <PolarRadiusAxis tick={{ fill: '#6b7280' }} className="dark:fill-gray-400" />
+                  <PolarAngleAxis dataKey="metric" tick={{ fill: '#6b7280' }} />
+                  <PolarRadiusAxis tick={{ fill: '#6b7280' }} />
                   <Radar
                     name="Our Company"
                     dataKey="us"
