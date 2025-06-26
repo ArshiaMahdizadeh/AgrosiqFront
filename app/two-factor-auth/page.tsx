@@ -221,14 +221,14 @@ export default function TwoFactorAuthSetup() {
   };
 
   return (
-    <div ref={pageRef} className="min-h-screen flex items-center justify-center px-4 py-32">
+    <div ref={pageRef} className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
         {/* Left side - Progress */}
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col space-y-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Plant className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-primary">Agrosiq</span>
+              <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
             </Link>
             
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -246,13 +246,13 @@ export default function TwoFactorAuthSetup() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 1 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 1 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   {currentStep > 1 ? <CheckCircle2 className="h-5 w-5" /> : "1"}
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 1 ? "text-primary" : "text-gray-600"
+                  currentStep >= 1 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Choose Method
                 </span>
@@ -261,13 +261,13 @@ export default function TwoFactorAuthSetup() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 2 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 2 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   {currentStep > 2 ? <CheckCircle2 className="h-5 w-5" /> : "2"}
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 2 ? "text-primary" : "text-gray-600"
+                  currentStep >= 2 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Setup
                 </span>
@@ -276,13 +276,13 @@ export default function TwoFactorAuthSetup() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 3 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 3 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   {currentStep > 3 ? <CheckCircle2 className="h-5 w-5" /> : "3"}
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 3 ? "text-primary" : "text-gray-600"
+                  currentStep >= 3 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Backup Codes
                 </span>
@@ -291,13 +291,13 @@ export default function TwoFactorAuthSetup() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  setupComplete ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  setupComplete ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   4
                 </div>
                 <span className={cn(
                   "font-medium",
-                  setupComplete ? "text-primary" : "text-gray-600"
+                  setupComplete ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Complete
                 </span>
@@ -327,9 +327,9 @@ export default function TwoFactorAuthSetup() {
         </div>
 
         {/* Right side - Setup Process */}
-        <Card className="md:col-span-3 shadow-lg">
+        <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>
+            <CardTitle className="text-gray-900 dark:text-white">
               {currentStep === 1 && "Choose Authentication Method"}
               {currentStep === 2 && selectedMethod === "authenticator" && "Set Up Authenticator App"}
               {currentStep === 2 && selectedMethod === "sms" && "Set Up SMS Authentication"}
@@ -337,7 +337,7 @@ export default function TwoFactorAuthSetup() {
               {currentStep === 3 && "Save Backup Codes"}
               {setupComplete && "Setup Complete"}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               {currentStep === 1 && "Select your preferred two-factor authentication method"}
               {currentStep === 2 && selectedMethod === "authenticator" && "Scan the QR code or enter the secret key manually"}
               {currentStep === 2 && selectedMethod === "sms" && "Enter your phone number to receive verification codes"}
@@ -351,7 +351,7 @@ export default function TwoFactorAuthSetup() {
             {currentStep === 1 && (
               <div className="space-y-4">
                 <Card
-                  className="method-card cursor-pointer hover:border-primary transition-colors"
+                  className="method-card cursor-pointer hover:border-primary transition-colors bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
                   onClick={() => handleMethodSelect("authenticator")}
                 >
                   <CardContent className="p-4 flex items-start gap-4">
@@ -359,7 +359,7 @@ export default function TwoFactorAuthSetup() {
                       <QrCode className="h-6 w-6 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium mb-1">Authenticator App</h3>
+                      <h3 className="font-medium mb-1 text-gray-900 dark:text-white">Authenticator App</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Use an authenticator app like Google Authenticator or Authy
                       </p>
@@ -369,7 +369,7 @@ export default function TwoFactorAuthSetup() {
                 </Card>
 
                 <Card
-                  className="method-card cursor-pointer hover:border-primary transition-colors"
+                  className="method-card cursor-pointer hover:border-primary transition-colors bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
                   onClick={() => handleMethodSelect("sms")}
                 >
                   <CardContent className="p-4 flex items-start gap-4">
@@ -377,7 +377,7 @@ export default function TwoFactorAuthSetup() {
                       <Smartphone className="h-6 w-6 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium mb-1">SMS Authentication</h3>
+                      <h3 className="font-medium mb-1 text-gray-900 dark:text-white">SMS Authentication</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Receive codes via SMS on your phone
                       </p>
@@ -386,7 +386,7 @@ export default function TwoFactorAuthSetup() {
                 </Card>
 
                 <Card
-                  className="method-card cursor-pointer hover:border-primary transition-colors"
+                  className="method-card cursor-pointer hover:border-primary transition-colors bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
                   onClick={() => handleMethodSelect("email")}
                 >
                   <CardContent className="p-4 flex items-start gap-4">
@@ -394,7 +394,7 @@ export default function TwoFactorAuthSetup() {
                       <Mail className="h-6 w-6 text-primary" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium mb-1">Email Authentication</h3>
+                      <h3 className="font-medium mb-1 text-gray-900 dark:text-white">Email Authentication</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Receive codes via email as a backup method
                       </p>
@@ -406,10 +406,10 @@ export default function TwoFactorAuthSetup() {
 
             {currentStep === 2 && selectedMethod === "authenticator" && (
               <div className="space-y-6">
-                <Tabs defaultValue="qr">
-                  <TabsList className="grid grid-cols-2 w-full">
-                    <TabsTrigger value="qr">QR Code</TabsTrigger>
-                    <TabsTrigger value="manual">Manual Entry</TabsTrigger>
+                <Tabs defaultValue="qr" className="bg-white dark:bg-gray-800">
+                  <TabsList className="grid grid-cols-2 w-full bg-gray-100 dark:bg-gray-700">
+                    <TabsTrigger value="qr" className="data-[state=active]:bg-primary data-[state=active]:text-white">QR Code</TabsTrigger>
+                    <TabsTrigger value="manual" className="data-[state=active]:bg-primary data-[state=active]:text-white">Manual Entry</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="qr" className="space-y-4">
@@ -432,19 +432,20 @@ export default function TwoFactorAuthSetup() {
                   
                   <TabsContent value="manual" className="space-y-4">
                     <div className="space-y-2">
-                      <Label>Secret Key</Label>
+                      <Label className="text-gray-900 dark:text-white">Secret Key</Label>
                       <div className="relative">
                         <Input
                           type={showSecretKey ? "text" : "password"}
                           value={secretKey}
                           readOnly
-                          className="pr-24"
+                          className="pr-24 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white"
                         />
                         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => setShowSecretKey(!showSecretKey)}
+                            className="hover:bg-gray-100 dark:hover:bg-gray-600"
                           >
                             {showSecretKey ? (
                               <EyeOff className="h-4 w-4" />
@@ -456,6 +457,7 @@ export default function TwoFactorAuthSetup() {
                             variant="ghost"
                             size="icon"
                             onClick={handleCopySecretKey}
+                            className="hover:bg-gray-100 dark:hover:bg-gray-600"
                           >
                             <Copy className="h-4 w-4" />
                           </Button>
@@ -464,7 +466,7 @@ export default function TwoFactorAuthSetup() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Recommended Apps</Label>
+                      <Label className="text-gray-900 dark:text-white">Recommended Apps</Label>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         {authenticatorApps.map((app) => (
                           <a
@@ -472,10 +474,10 @@ export default function TwoFactorAuthSetup() {
                             href={app.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                           >
                             <span>{app.icon}</span>
-                            <span className="text-sm">{app.name}</span>
+                            <span className="text-sm text-gray-900 dark:text-white">{app.name}</span>
                           </a>
                         ))}
                       </div>
@@ -483,9 +485,9 @@ export default function TwoFactorAuthSetup() {
                   </TabsContent>
                 </Tabs>
 
-                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="space-y-2">
-                    <Label>Enter Verification Code</Label>
+                    <Label className="text-gray-900 dark:text-white">Enter Verification Code</Label>
                     <Input
                       type="text"
                       maxLength={6}
@@ -494,7 +496,10 @@ export default function TwoFactorAuthSetup() {
                         setVerificationCode(e.target.value.replace(/\D/g, ""));
                         setError("");
                       }}
-                      className={error ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                        error ? "border-red-500" : ""
+                      )}
                     />
                     {error && (
                       <p className="text-sm text-red-500">{error}</p>
@@ -502,7 +507,7 @@ export default function TwoFactorAuthSetup() {
                   </div>
 
                   <Button
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary-600 text-white"
                     onClick={handleVerifyCode}
                     disabled={verificationCode.length !== 6 || isVerifying}
                   >
@@ -528,14 +533,14 @@ export default function TwoFactorAuthSetup() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-1">
-                      <Label>Country Code</Label>
+                      <Label className="text-gray-900 dark:text-white">Country Code</Label>
                       <Select value={countryCode} onValueChange={setCountryCode}>
-                        <SelectTrigger>
+                        <SelectTrigger className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                           {countryCodes.map((code) => (
-                            <SelectItem key={code.value} value={code.value}>
+                            <SelectItem key={code.value} value={code.value} className="text-gray-900 dark:text-white dark:hover:bg-gray-700">
                               {code.label}
                             </SelectItem>
                           ))}
@@ -544,18 +549,19 @@ export default function TwoFactorAuthSetup() {
                     </div>
                     
                     <div className="col-span-2">
-                      <Label>Phone Number</Label>
+                      <Label className="text-gray-900 dark:text-white">Phone Number</Label>
                       <Input
                         type="tel"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
                         placeholder="Enter phone number"
+                        className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                       />
                     </div>
                   </div>
 
                   <Button
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary-600 text-white"
                     disabled={!countryCode || phoneNumber.length < 10 || resendTimer > 0}
                     onClick={handleResendCode}
                   >
@@ -567,9 +573,9 @@ export default function TwoFactorAuthSetup() {
                   </Button>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="space-y-2">
-                    <Label>Enter Verification Code</Label>
+                    <Label className="text-gray-900 dark:text-white">Enter Verification Code</Label>
                     <Input
                       type="text"
                       maxLength={6}
@@ -578,7 +584,10 @@ export default function TwoFactorAuthSetup() {
                         setVerificationCode(e.target.value.replace(/\D/g, ""));
                         setError("");
                       }}
-                      className={error ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                        error ? "border-red-500" : ""
+                      )}
                     />
                     {error && (
                       <p className="text-sm text-red-500">{error}</p>
@@ -586,7 +595,7 @@ export default function TwoFactorAuthSetup() {
                   </div>
 
                   <Button
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary-600 text-white"
                     onClick={handleVerifyCode}
                     disabled={verificationCode.length !== 6 || isVerifying}
                   >
@@ -611,17 +620,18 @@ export default function TwoFactorAuthSetup() {
               <div className="space-y-6">
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label>Email Address</Label>
+                    <Label className="text-gray-900 dark:text-white">Email Address</Label>
                     <Input
                       type="email"
                       placeholder="Enter your email address"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400"
                     />
                   </div>
 
                   <Button
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary-600 text-white"
                     disabled={!isValidEmail(email) || resendTimer > 0}
                     onClick={handleResendCode}
                   >
@@ -633,9 +643,9 @@ export default function TwoFactorAuthSetup() {
                   </Button>
                 </div>
 
-                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="space-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <div className="space-y-2">
-                    <Label>Enter Verification Code</Label>
+                    <Label className="text-gray-900 dark:text-white">Enter Verification Code</Label>
                     <Input
                       type="text"
                       maxLength={6}
@@ -644,7 +654,10 @@ export default function TwoFactorAuthSetup() {
                         setVerificationCode(e.target.value.replace(/\D/g, ""));
                         setError("");
                       }}
-                      className={error ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                        error ? "border-red-500" : ""
+                      )}
                     />
                     {error && (
                       <p className="text-sm text-red-500">{error}</p>
@@ -652,7 +665,7 @@ export default function TwoFactorAuthSetup() {
                   </div>
 
                   <Button
-                    className="w-full"
+                    className="w-full bg-primary hover:bg-primary-600 text-white"
                     onClick={handleVerifyCode}
                     disabled={verificationCode.length !== 6 || isVerifying}
                   >
@@ -675,7 +688,7 @@ export default function TwoFactorAuthSetup() {
 
             {currentStep === 3 && (
               <div className="space-y-6">
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-900">
+                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
                   <div className="flex items-start gap-3">
                     <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
                     <div>
@@ -694,7 +707,7 @@ export default function TwoFactorAuthSetup() {
                   {backupCodes.map((code, index) => (
                     <div
                       key={index}
-                      className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg font-mono text-center"
+                      className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg font-mono text-center text-gray-900 dark:text-white"
                     >
                       {code}
                     </div>
@@ -703,7 +716,7 @@ export default function TwoFactorAuthSetup() {
 
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
                   onClick={handleDownloadBackupCodes}
                 >
                   <Download className="mr-2 h-4 w-4" />
@@ -716,7 +729,7 @@ export default function TwoFactorAuthSetup() {
                     checked={backupCodesConfirmed}
                     onCheckedChange={(checked) => setBackupCodesConfirmed(checked as boolean)}
                   />
-                  <Label htmlFor="confirm-backup" className="text-sm">
+                  <Label htmlFor="confirm-backup" className="text-sm text-gray-900 dark:text-white">
                     I have saved these backup codes in a secure location
                   </Label>
                 </div>
@@ -742,8 +755,8 @@ export default function TwoFactorAuthSetup() {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
-                    <h4 className="font-medium mb-2">What's Next?</h4>
+                  <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-700">
+                    <h4 className="font-medium mb-2 text-gray-900 dark:text-white">What's Next?</h4>
                     <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                       <li>• You'll be asked for a verification code when signing in</li>
                       <li>• Keep your backup codes safe</li>
@@ -751,7 +764,7 @@ export default function TwoFactorAuthSetup() {
                     </ul>
                   </div>
 
-                  <Button className="w-full" onClick={() => router.push("/dashboard")}>
+                  <Button className="w-full bg-primary hover:bg-primary-600 text-white" onClick={() => router.push("/dashboard")}>
                     Continue to Dashboard
                   </Button>
                 </div>
@@ -759,13 +772,13 @@ export default function TwoFactorAuthSetup() {
             )}
           </CardContent>
 
-          <CardFooter>
+          <CardFooter className="border-t border-gray-200 dark:border-gray-700">
             <div className="w-full flex justify-between items-center">
               {currentStep > 1 && !setupComplete ? (
                 <Button
                   variant="ghost"
                   onClick={() => setCurrentStep(prev => prev - 1)}
-                  className="flex items-center gap-2"
+                  className="flex items-center mt-3 gap-2 text-gray-600 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Back
@@ -774,14 +787,14 @@ export default function TwoFactorAuthSetup() {
                 <Button
                   variant="ghost"
                   asChild
-                  className="flex items-center gap-2"
+                  className="flex items-center top-3 mt-3 gap-2 text-gray-600 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                 >
                   <Link href="/dashboard">Skip for now</Link>
                 </Button>
               )}
 
               {currentStep === 3 && !setupComplete && (
-                <Button onClick={handleComplete} className="flex items-center gap-2">
+                <Button onClick={handleComplete} className="flex items-center gap-2 bg-primary hover:bg-primary-600 text-white">
                   Complete Setup
                   <ArrowRight className="h-4 w-4" />
                 </Button>

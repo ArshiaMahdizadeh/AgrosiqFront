@@ -152,14 +152,14 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-32">
+    <div className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
         {/* Left side - Progress and Info */}
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col space-y-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Plant className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-primary">Agrosiq</span>
+              <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
             </Link>
             
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -176,13 +176,13 @@ export default function Register() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 1 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 1 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   {currentStep > 1 ? <CheckCircle2 className="h-5 w-5" /> : "1"}
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 1 ? "text-primary" : "text-gray-600"
+                  currentStep >= 1 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Personal Information
                 </span>
@@ -190,13 +190,13 @@ export default function Register() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 2 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 2 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   {currentStep > 2 ? <CheckCircle2 className="h-5 w-5" /> : "2"}
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 2 ? "text-primary" : "text-gray-600"
+                  currentStep >= 2 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Business Details
                 </span>
@@ -204,13 +204,13 @@ export default function Register() {
               <div className="flex items-center gap-3">
                 <div className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                  currentStep >= 3 ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                  currentStep >= 3 ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                 )}>
                   3
                 </div>
                 <span className={cn(
                   "font-medium",
-                  currentStep >= 3 ? "text-primary" : "text-gray-600"
+                  currentStep >= 3 ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
                 )}>
                   Security Setup
                 </span>
@@ -220,14 +220,14 @@ export default function Register() {
         </div>
 
         {/* Right side - Form */}
-        <Card className="md:col-span-3 shadow-lg">
+        <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle>
+            <CardTitle className="text-gray-900 dark:text-white">
               {currentStep === 1 && "Personal Information"}
               {currentStep === 2 && "Business Details"}
               {currentStep === 3 && "Security Setup"}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               {currentStep === 1 && "Enter your personal contact information"}
               {currentStep === 2 && "Tell us about your business"}
               {currentStep === 3 && "Create a secure password for your account"}
@@ -240,26 +240,34 @@ export default function Register() {
                 <>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName" className="text-gray-900 dark:text-white">First Name</Label>
                       <Input
                         id="firstName"
                         name="firstName"
                         value={formData.firstName}
+                        placeholder="Enter First Name"
                         onChange={handleInputChange}
-                        className={errors.firstName ? "border-red-500" : ""}
+                        className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                          errors.firstName ? "border-red-500" : ""
+                        )}
                       />
                       {errors.firstName && (
                         <span className="text-sm text-red-500">{errors.firstName}</span>
                       )}
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName" className="text-gray-900 dark:text-white">Last Name</Label>
                       <Input
                         id="lastName"
                         name="lastName"
                         value={formData.lastName}
+                        placeholder="Enter Last Name"
                         onChange={handleInputChange}
-                        className={errors.lastName ? "border-red-500" : ""}
+                        className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                          errors.lastName ? "border-red-500" : ""
+                        )}
                       />
                       {errors.lastName && (
                         <span className="text-sm text-red-500">{errors.lastName}</span>
@@ -268,14 +276,18 @@ export default function Register() {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-gray-900 dark:text-white">Email</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       value={formData.email}
+                      placeholder="email@example.com"
                       onChange={handleInputChange}
-                      className={errors.email ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                        errors.email ? "border-red-500" : ""
+                      )}
                     />
                     {errors.email && (
                       <span className="text-sm text-red-500">{errors.email}</span>
@@ -283,14 +295,18 @@ export default function Register() {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone" className="text-gray-900 dark:text-white">Phone Number</Label>
                     <Input
                       id="phone"
                       name="phone"
                       type="tel"
+                      placeholder="+1 1234 56789"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className={errors.phone ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                        errors.phone ? "border-red-500" : ""
+                      )}
                     />
                     {errors.phone && (
                       <span className="text-sm text-red-500">{errors.phone}</span>
@@ -303,13 +319,16 @@ export default function Register() {
               {currentStep === 2 && (
                 <>
                   <div className="space-y-2">
-                    <Label htmlFor="companyName">Company Name</Label>
+                    <Label htmlFor="companyName" className="text-gray-900 dark:text-white">Company Name</Label>
                     <Input
                       id="companyName"
                       name="companyName"
                       value={formData.companyName}
                       onChange={handleInputChange}
-                      className={errors.companyName ? "border-red-500" : ""}
+                      className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                        errors.companyName ? "border-red-500" : ""
+                      )}
                     />
                     {errors.companyName && (
                       <span className="text-sm text-red-500">{errors.companyName}</span>
@@ -317,19 +336,22 @@ export default function Register() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="businessType">Business Type</Label>
+                    <Label htmlFor="businessType" className="text-gray-900 dark:text-white">Business Type</Label>
                     <Select
                       value={formData.businessType}
                       onValueChange={(value) => handleSelectChange(value, "businessType")}
                     >
-                      <SelectTrigger className={errors.businessType ? "border-red-500" : ""}>
+                      <SelectTrigger className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                        errors.businessType ? "border-red-500" : ""
+                      )}>
                         <SelectValue placeholder="Select business type" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="farmer">Farmer/Producer</SelectItem>
-                        <SelectItem value="exporter">Exporter/Trader</SelectItem>
-                        <SelectItem value="processor">Processor/Manufacturer</SelectItem>
-                        <SelectItem value="distributor">Distributor/Wholesaler</SelectItem>
+                      <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                        <SelectItem value="farmer" className="dark:hover:bg-gray-700">Farmer/Producer</SelectItem>
+                        <SelectItem value="exporter" className="dark:hover:bg-gray-700">Exporter/Trader</SelectItem>
+                        <SelectItem value="processor" className="dark:hover:bg-gray-700">Processor/Manufacturer</SelectItem>
+                        <SelectItem value="distributor" className="dark:hover:bg-gray-700">Distributor/Wholesaler</SelectItem>
                       </SelectContent>
                     </Select>
                     {errors.businessType && (
@@ -339,21 +361,24 @@ export default function Register() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="country">Country</Label>
+                      <Label htmlFor="country" className="text-gray-900 dark:text-white">Country</Label>
                       <Select
                         value={formData.country}
                         onValueChange={(value) => handleSelectChange(value, "country")}
                       >
-                        <SelectTrigger className={errors.country ? "border-red-500" : ""}>
+                        <SelectTrigger className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                          errors.country ? "border-red-500" : ""
+                        )}>
                           <SelectValue placeholder="Select country" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="uae">United Arab Emirates</SelectItem>
-                          <SelectItem value="saudi">Saudi Arabia</SelectItem>
-                          <SelectItem value="qatar">Qatar</SelectItem>
-                          <SelectItem value="kuwait">Kuwait</SelectItem>
-                          <SelectItem value="oman">Oman</SelectItem>
-                          <SelectItem value="bahrain">Bahrain</SelectItem>
+                        <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                          <SelectItem value="uae" className="dark:hover:bg-gray-700">United Arab Emirates</SelectItem>
+                          <SelectItem value="saudi" className="dark:hover:bg-gray-700">Saudi Arabia</SelectItem>
+                          <SelectItem value="qatar" className="dark:hover:bg-gray-700">Qatar</SelectItem>
+                          <SelectItem value="kuwait" className="dark:hover:bg-gray-700">Kuwait</SelectItem>
+                          <SelectItem value="oman" className="dark:hover:bg-gray-700">Oman</SelectItem>
+                          <SelectItem value="bahrain" className="dark:hover:bg-gray-700">Bahrain</SelectItem>
                         </SelectContent>
                       </Select>
                       {errors.country && (
@@ -362,13 +387,16 @@ export default function Register() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="city">City</Label>
+                      <Label htmlFor="city" className="text-gray-900 dark:text-white">City</Label>
                       <Input
                         id="city"
                         name="city"
                         value={formData.city}
                         onChange={handleInputChange}
-                        className={errors.city ? "border-red-500" : ""}
+                        className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                          errors.city ? "border-red-500" : ""
+                        )}
                       />
                       {errors.city && (
                         <span className="text-sm text-red-500">{errors.city}</span>
@@ -377,19 +405,22 @@ export default function Register() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="businessSize">Business Size</Label>
+                    <Label htmlFor="businessSize" className="text-gray-900 dark:text-white">Business Size</Label>
                     <Select
                       value={formData.businessSize}
                       onValueChange={(value) => handleSelectChange(value, "businessSize")}
                     >
-                      <SelectTrigger className={errors.businessSize ? "border-red-500" : ""}>
+                      <SelectTrigger className={cn(
+                        "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white",
+                        errors.businessSize ? "border-red-500" : ""
+                      )}>
                         <SelectValue placeholder="Select business size" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="startup">Startup (1-10 employees)</SelectItem>
-                        <SelectItem value="small">Small (11-50 employees)</SelectItem>
-                        <SelectItem value="medium">Medium (51-200 employees)</SelectItem>
-                        <SelectItem value="large">Large (201+ employees)</SelectItem>
+                      <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                        <SelectItem value="startup" className="dark:hover:bg-gray-700">Startup (1-10 employees)</SelectItem>
+                        <SelectItem value="small" className="dark:hover:bg-gray-700">Small (11-50 employees)</SelectItem>
+                        <SelectItem value="medium" className="dark:hover:bg-gray-700">Medium (51-200 employees)</SelectItem>
+                        <SelectItem value="large" className="dark:hover:bg-gray-700">Large (201+ employees)</SelectItem>
                       </SelectContent>
                     </Select>
                     {errors.businessSize && (
@@ -403,7 +434,7 @@ export default function Register() {
               {currentStep === 3 && (
                 <>
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="text-gray-900 dark:text-white">Password</Label>
                     <div className="relative">
                       <Input
                         id="password"
@@ -411,12 +442,15 @@ export default function Register() {
                         type={showPassword ? "text" : "password"}
                         value={formData.password}
                         onChange={handleInputChange}
-                        className={errors.password ? "border-red-500 pr-10" : "pr-10"}
+                        className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 pr-10",
+                          errors.password ? "border-red-500" : ""
+                        )}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400"
                       >
                         {showPassword ? (
                           <EyeOff className="h-4 w-4" />
@@ -431,7 +465,7 @@ export default function Register() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <Label htmlFor="confirmPassword" className="text-gray-900 dark:text-white">Confirm Password</Label>
                     <div className="relative">
                       <Input
                         id="confirmPassword"
@@ -439,12 +473,15 @@ export default function Register() {
                         type={showConfirmPassword ? "text" : "password"}
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
-                        className={errors.confirmPassword ? "border-red-500 pr-10" : "pr-10"}
+                        className={cn(
+                          "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 pr-10",
+                          errors.confirmPassword ? "border-red-500" : ""
+                        )}
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400"
                       >
                         {showConfirmPassword ? (
                           <EyeOff className="h-4 w-4" />
@@ -492,7 +529,7 @@ export default function Register() {
                       <Label
                         htmlFor="agreeTerms"
                         className={cn(
-                          "text-sm font-normal",
+                          "text-sm font-normal text-gray-900 dark:text-white",
                           errors.agreeTerms ? "text-red-500" : ""
                         )}
                       >
@@ -521,7 +558,7 @@ export default function Register() {
                           setFormData(prev => ({ ...prev, agreeMarketing: checked as boolean }))
                         }
                       />
-                      <Label htmlFor="agreeMarketing" className="text-sm font-normal">
+                      <Label htmlFor="agreeMarketing" className="text-sm font-normal text-gray-900 dark:text-white">
                         I agree to receive marketing communications
                       </Label>
                     </div>
@@ -536,6 +573,7 @@ export default function Register() {
                 type="button"
                 variant="outline"
                 onClick={handleBack}
+                className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 Back
               </Button>
@@ -543,7 +581,7 @@ export default function Register() {
             {currentStep < 3 ? (
               <Button
                 type="button"
-                className="bg-primary hover:bg-primary-600 ml-auto"
+                className="bg-primary hover:bg-primary-600 ml-auto text-white"
                 onClick={handleNext}
               >
                 Next
@@ -551,7 +589,7 @@ export default function Register() {
             ) : (
               <Button
                 type="submit"
-                className="bg-primary hover:bg-primary-600 ml-auto"
+                className="bg-primary hover:bg-primary-600 ml-auto text-white"
                 onClick={handleSubmit}
               >
                 Create Account

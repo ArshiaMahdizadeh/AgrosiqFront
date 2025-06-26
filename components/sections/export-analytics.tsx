@@ -237,7 +237,20 @@ export default function ExportAnalytics() {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
                       <YAxis />
-                      <Tooltip />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'rgba(31, 41, 55, 0.75)',
+                          border: '1px solid #4B5563',
+                          borderRadius: '8px',
+                          color: '#F9FAFB'
+                        }}
+                        itemStyle={{
+                          color: '#F9FAFB',
+                        }}
+                        labelStyle={{
+                          color: '#F9FAFB',
+                        }}
+                      />
                       <Bar dataKey="export" fill="#00796B" name="Export (tons)" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -259,7 +272,20 @@ export default function ExportAnalytics() {
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip 
+                        contentStyle={{
+                          backgroundColor: 'rgba(31, 41, 55, 0.75)',
+                          border: '1px solid #4B5563',
+                          borderRadius: '8px',
+                          color: '#F9FAFB'
+                        }}
+                        itemStyle={{
+                          color: '#F9FAFB',
+                        }}
+                        labelStyle={{
+                          color: '#F9FAFB',
+                        }}
+                      />
                       <Legend />
                     </PieChart>
                   </ResponsiveContainer>

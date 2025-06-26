@@ -199,7 +199,7 @@ export function Navbar() {
           {/* Action Buttons */}
           <div className="p-4 border-t border-gray-200 dark:border-gray-800">
             <div className="space-y-2">
-              <Button variant="outline" asChild className="w-full justify-center">
+              <Button variant="outline" asChild className="w-full justify-center border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                 <Link href="/sign-in" onClick={closeMobileMenu}>Sign In</Link>
               </Button>
               <Button variant="default" className="w-full bg-primary hover:bg-primary-600 text-white justify-center" asChild>

@@ -203,7 +203,20 @@ export default function ProductCharts() {
                         <XAxis dataKey="month" />
                         <YAxis domain={['dataMin - 1', 'dataMax + 1']} />
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <Tooltip />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: 'rgba(31, 41, 55, 0.75)',
+                            border: '1px solid #4B5563',
+                            borderRadius: '8px',
+                            color: '#F9FAFB'
+                          }}
+                          itemStyle={{
+                            color: '#F9FAFB',
+                          }}
+                          labelStyle={{
+                            color: '#F9FAFB',
+                          }}
+                        />
                         <Area
                           type="monotone"
                           dataKey="price"

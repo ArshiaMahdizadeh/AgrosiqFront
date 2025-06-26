@@ -141,25 +141,25 @@ export default function DashboardPreview() {
               <TabsList className="grid grid-cols-4 mb-6 bg-gray-100 dark:bg-gray-800">
   <TabsTrigger 
     value="1M"
-    className="data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300"
+    className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:bg-primary data-[state=active]:text-white"
   >
     1M
   </TabsTrigger>
   <TabsTrigger 
     value="3M"
-    className="data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300"
+    className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:bg-primary data-[state=active]:text-white"
   >
     3M
   </TabsTrigger>
   <TabsTrigger 
     value="6M"
-    className="data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300"
+    className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:bg-primary data-[state=active]:text-white"
   >
     6M
   </TabsTrigger>
   <TabsTrigger 
     value="1Y"
-    className="data-[state=active]:bg-white data-[state=active]:text-primary dark:data-[state=active]:bg-gray-700 dark:data-[state=active]:text-white dark:text-gray-300"
+    className="data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:bg-primary data-[state=active]:text-white"
   >
     1Y
   </TabsTrigger>
@@ -173,7 +173,20 @@ export default function DashboardPreview() {
                         <XAxis dataKey="name" />
                         <YAxis yAxisId="left" orientation="left" stroke="#00796B" />
                         <YAxis yAxisId="right" orientation="right" stroke="#8BC34A" />
-                        <Tooltip />
+                        <Tooltip
+                          contentStyle={{
+                            backgroundColor: 'rgba(31, 41, 55, 0.75)',
+                            border: '1px solid #4B5563',
+                            borderRadius: '8px',
+                            color: '#F9FAFB'
+                          }}
+                          itemStyle={{
+                            color: '#F9FAFB',
+                          }}
+                          labelStyle={{
+                            color: '#F9FAFB',
+                          }}
+                        />
                         <Legend />
                         <Line
                           yAxisId="left"
