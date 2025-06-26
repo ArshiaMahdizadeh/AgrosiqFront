@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRegisterMutation } from '@/lib/redux/api/authApi';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,6 +32,7 @@ interface PasswordRequirement {
 }
 
 export default function Register() {
+  const [register, { isLoading, isError, isSuccess, error }] = useRegisterMutation();
   const [currentStep, setCurrentStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -146,10 +148,21 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateStep(3)) {
-      // Handle registration logic here
-      console.log(formData);
+      const payload = {
+        email: formData.email,
+        full_name: `${formData.firstName} ${formData.lastName}`,
+        role: formData.businessType,
+        password: formData.password,
+      };
+      try {
+        const response = await register(payload).unwrap();
+        console.log('Registration success:', response);
+      } catch (err) {
+        console.error('Registration failed:', err);
+      }
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
