@@ -107,14 +107,14 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-32">
+    <div className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
         {/* Left side - Info */}
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col space-y-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Plant className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-primary">Agrosiq</span>
+              <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
             </Link>
             
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -127,32 +127,32 @@ export default function VerifyEmail() {
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm
-                ${verificationState === "pending" ? "bg-primary text-white" : "bg-gray-200 text-gray-600"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                ${verificationState === "pending" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
                 1
               </div>
               <span className={`font-medium
-                ${verificationState === "pending" ? "text-primary" : "text-gray-600"}`}>
+                ${verificationState === "pending" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
                 Check your email
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm
-                ${verificationState === "verifying" ? "bg-primary text-white" : "bg-gray-200 text-gray-600"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                ${verificationState === "verifying" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
                 2
               </div>
               <span className={`font-medium
-                ${verificationState === "verifying" ? "text-primary" : "text-gray-600"}`}>
+                ${verificationState === "verifying" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
                 Verify email
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm
-                ${verificationState === "verified" ? "bg-primary text-white" : "bg-gray-200 text-gray-600"}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                ${verificationState === "verified" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
                 3
               </div>
               <span className={`font-medium
-                ${verificationState === "verified" ? "text-primary" : "text-gray-600"}`}>
+                ${verificationState === "verified" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
                 Access all features
               </span>
             </div>
@@ -184,9 +184,9 @@ export default function VerifyEmail() {
         </div>
 
         {/* Right side - Verification Status */}
-        <Card className="md:col-span-3 shadow-lg">
+        <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               {verificationState === "verified" ? (
                 <>
                   <CheckCircle2 className="h-6 w-6 text-green-500" />
@@ -204,7 +204,7 @@ export default function VerifyEmail() {
                 </>
               )}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               {verificationState === "verified"
                 ? "Your email has been successfully verified"
                 : verificationState === "verifying"
@@ -249,7 +249,7 @@ export default function VerifyEmail() {
                   </ul>
                 </div>
 
-                <Button className="w-full bg-primary hover:bg-primary-600" asChild>
+                <Button className="w-full bg-primary hover:bg-primary-600 text-white" asChild>
                   <Link href="/dashboard">Continue to Dashboard</Link>
                 </Button>
               </div>
@@ -277,9 +277,9 @@ export default function VerifyEmail() {
                 </div>
 
                 {error && (
-                  <Alert variant="destructive">
+                  <Alert variant="destructive" className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900">
                     <AlertCircle className="h-4 w-4" />
-                    <AlertDescription>{error}</AlertDescription>
+                    <AlertDescription className="text-red-800 dark:text-red-200">{error}</AlertDescription>
                   </Alert>
                 )}
 
@@ -302,7 +302,7 @@ export default function VerifyEmail() {
                 ) : (
                   <Button
                     variant="outline"
-                    className="w-full"
+                    className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
                     onClick={handleResend}
                   >
                     Resend Verification Email
@@ -313,7 +313,7 @@ export default function VerifyEmail() {
                 <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
                   <Button
                     variant="outline"
-                    className="w-full"
+                    className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
                     onClick={handleDemoVerification}
                   >
                     Simulate Email Verification
@@ -322,11 +322,11 @@ export default function VerifyEmail() {
               </div>
             )}
           </CardContent>
-          <CardFooter>
+          <CardFooter className="border-t border-gray-200 dark:border-gray-700">
             <div className="w-full flex justify-between items-center">
               <Button
                 variant="ghost"
-                className="text-gray-600 hover:text-gray-900"
+                className="mt-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
                 asChild
               >
                 <Link href="/sign-in" className="flex items-center gap-2">
