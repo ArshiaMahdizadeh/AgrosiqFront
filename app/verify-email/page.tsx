@@ -68,28 +68,25 @@ export default function VerifyEmail() {
     }, 1000);
   };
 
+  useEffect(() => {
+    if (token) {
+      handleVerification();
+    }
+  }, [token]);
+  
   const handleVerification = async () => {
     setVerificationState("verifying");
-    setError("");
-
     try {
-      // Simulate verification process
-      for (let i = 0; i <= 100; i += 20) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setProgress(i);
-      }
-
-      // Check if token is valid (demo purposes)
-      if (VALID_TOKENS.includes(token)) {
-        setVerificationState("verified");
-      } else {
-        throw new Error("Invalid or expired verification token");
-      }
+      const res = await fetch(`http://localhost:8000/api/v1/auth/verify-email?token=${token}`);
+      if (!res.ok) throw new Error("Invalid or expired verification link");
+  
+      setVerificationState("verified");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Verification failed");
+      setError("Email verification failed");
       setVerificationState("error");
     }
   };
+  
 
   const handleResend = async () => {
     try {

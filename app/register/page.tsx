@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 import { useRegisterMutation } from '@/lib/redux/api/authApi';
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +34,8 @@ interface PasswordRequirement {
 }
 
 export default function Register() {
+  const router = useRouter();
+  const { toast } = useToast();
   const [register, { isLoading, isError, isSuccess, error }] = useRegisterMutation();
   const [currentStep, setCurrentStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -146,7 +150,6 @@ export default function Register() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
     if (validateStep(3)) {
       const payload = {
         email: formData.email,
@@ -154,9 +157,13 @@ export default function Register() {
         role: formData.businessType,
         password: formData.password,
       };
+  
       try {
         const response = await register(payload).unwrap();
         console.log('Registration success:', response);
+        
+        // redirect to verification page with email param
+        router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       } catch (err) {
         console.error('Registration failed:', err);
       }
