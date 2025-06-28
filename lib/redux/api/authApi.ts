@@ -1,9 +1,8 @@
-// lib/redux/api/authApi.ts (This is an example, adapt it to your existing file)
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// lib/redux/api/authApi.ts
+import { baseApi } from './baseApi'; // Import the central baseApi
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/v1/' }), // Replace with your actual backend URL
+// Use injectEndpoints to add endpoints to the existing baseApi
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (credentials) => ({
@@ -12,23 +11,26 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
-    // Add the new endpoint for verifying the email
     verifyEmail: builder.mutation({
       query: ({ token }) => ({
-        url: 'auth/verify-email', // Assuming this is your backend endpoint for verification
+        url: 'auth/verify-email',
         method: 'POST',
         body: { token },
       }),
     }),
-    // Add the new endpoint for resending the verification email
     resendVerificationEmail: builder.mutation({
-        query: ({ email }) => ({
-            url: 'auth/resend-verification-email', // Assuming this endpoint exists on your backend
-            method: 'POST',
-            body: { email }
-        })
+      query: ({ email }) => ({
+        url: 'auth/resend-verification-email',
+        method: 'POST',
+        body: { email }
+      })
     })
   }),
+  // This can be used to override the api definition of an existing endpoint.
+  // Useful if you're injecting endpoints from a different feature slice.
+  // For this case it is not needed, but good to know it exists.
+  overrideExisting: false, 
 });
 
+// The hooks are now exported from the enhanced API
 export const { useRegisterMutation, useVerifyEmailMutation, useResendVerificationEmailMutation } = authApi;
