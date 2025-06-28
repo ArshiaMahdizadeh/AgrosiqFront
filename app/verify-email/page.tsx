@@ -61,16 +61,31 @@ export default function VerifyEmail() {
     }, 100);
 
     try {
-      const user = await verifyEmail({ token }).unwrap();
+      // The API call now returns an object with token and user properties
+      const response = await verifyEmail({ token }).unwrap();
 
-      localStorage.setItem("user", JSON.stringify(user));
+      // --- THIS IS THE UPDATED LOGIC ---
+      // 1. Save the user object to local storage
+      if (response.user) {
+        localStorage.setItem("user", JSON.stringify(response.user));
+      }
+
+      // 2. Save the access token to local storage (or your state management)
+      if (response.access_token) {
+        localStorage.setItem("accessToken", response.access_token);
+      }
+      // ---------------------------------
+
       setVerificationState("verified");
 
+      // Now, this will work correctly because an access token is present!
       setTimeout(() => {
         router.push("/dashboard");
       }, 1500);
     } catch {
-      setError("Email verification failed. Your link may be expired or invalid.");
+      setError(
+        "Email verification failed. Your link may be expired or invalid."
+      );
       setVerificationState("error");
     }
   };
@@ -105,46 +120,51 @@ export default function VerifyEmail() {
         <div className="md:col-span-2 space-y-6">
           <Link href="/" className="flex items-center gap-2 mb-6">
             <Plant className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
+            <span className="text-xl font-bold text-primary dark:text-primary-300">
+              Agrosiq
+            </span>
           </Link>
 
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
             Verify Your Email
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Follow these steps to verify your email address and access all features.
+            Follow these steps to verify your email address and access all
+            features.
           </p>
 
           <div className="space-y-4">
-            {["Check your email", "Verify email", "Access all features"].map((text, idx) => {
-              const step = idx + 1;
-              const active =
-                (step === 1 && verificationState === "pending") ||
-                (step === 2 && verificationState === "verifying") ||
-                (step === 3 && verificationState === "verified");
-              return (
-                <div key={idx} className="flex items-center gap-3">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      active
-                        ? "bg-primary text-white"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                    }`}
-                  >
-                    {step}
+            {["Check your email", "Verify email", "Access all features"].map(
+              (text, idx) => {
+                const step = idx + 1;
+                const active =
+                  (step === 1 && verificationState === "pending") ||
+                  (step === 2 && verificationState === "verifying") ||
+                  (step === 3 && verificationState === "verified");
+                return (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                        active
+                          ? "bg-primary text-white"
+                          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                      }`}
+                    >
+                      {step}
+                    </div>
+                    <span
+                      className={`font-medium ${
+                        active
+                          ? "text-primary dark:text-primary-300"
+                          : "text-gray-600 dark:text-gray-400"
+                      }`}
+                    >
+                      {text}
+                    </span>
                   </div>
-                  <span
-                    className={`font-medium ${
-                      active
-                        ? "text-primary dark:text-primary-300"
-                        : "text-gray-600 dark:text-gray-400"
-                    }`}
-                  >
-                    {text}
-                  </span>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
 
           <div className="pt-6 border-t border-gray-200 dark:border-gray-800">
@@ -225,7 +245,10 @@ export default function VerifyEmail() {
                     </div>
                   </div>
                 </div>
-                <Button className="w-full bg-primary hover:bg-primary-600 text-white" asChild>
+                <Button
+                  className="w-full bg-primary hover:bg-primary-600 text-white"
+                  asChild
+                >
                   <Link href="/dashboard">Continue to Dashboard</Link>
                 </Button>
               </div>
@@ -292,7 +315,10 @@ export default function VerifyEmail() {
                 className="text-gray-600 dark:text-gray-400"
                 asChild
               >
-                <Link href="/sign-in" className="flex mt-1 items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
+                <Link
+                  href="/sign-in"
+                  className="flex mt-1 items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
+                >
                   <ArrowLeft className="h-4 w-4" />
                   Back to Sign In
                 </Link>
