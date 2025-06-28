@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useVerifyEmailMutation } from "@/lib/redux/api/authApi";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
+import {
   Plane as Plant,
   Mail,
   CheckCircle2,
@@ -24,36 +25,55 @@ import {
   Bell,
   Shield,
   Key,
-  Lock
+  Lock,
 } from "lucide-react";
-
-// Valid demo tokens for testing
-const VALID_TOKENS = ["valid-token-123", "demo-token-456", "test-token-789"];
 
 export default function VerifyEmail() {
   const searchParams = useSearchParams();
-  const [email, setEmail] = useState(searchParams.get("email") || "");
-  const [token, setToken] = useState(searchParams.get("token") || "");
-  const [verificationState, setVerificationState] = useState<"pending" | "verifying" | "verified" | "error">("pending");
+  const router = useRouter();
+  const token = searchParams.get("token") || "";
+  const email = searchParams.get("email") || "";
+
+  const [verifyEmail] = useVerifyEmailMutation();
+
+  const [verificationState, setVerificationState] = useState<
+    "pending" | "verifying" | "verified" | "error"
+  >("pending");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    // Auto-verify if token is present
-    if (token) {
-      handleVerification();
-    }
+    if (token) handleVerification();
+    return () => clearInterval(timerRef.current);
   }, [token]);
 
-  useEffect(() => {
-    // Cleanup timer on unmount
-    return () => {
-      clearInterval(timerRef.current);
-    };
-  }, []);
+  const handleVerification = async () => {
+    setVerificationState("verifying");
 
-  const timerRef = useRef<NodeJS.Timeout>();
+    // Optional loading progress bar
+    let val = 0;
+    const interval = setInterval(() => {
+      val += 5;
+      setProgress(val);
+      if (val >= 100) clearInterval(interval);
+    }, 100);
+
+    try {
+      const user = await verifyEmail({ token }).unwrap();
+
+      localStorage.setItem("user", JSON.stringify(user));
+      setVerificationState("verified");
+
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1500);
+    } catch {
+      setError("Email verification failed. Your link may be expired or invalid.");
+      setVerificationState("error");
+    }
+  };
 
   const startResendTimer = () => {
     setResendTimer(60);
@@ -68,39 +88,14 @@ export default function VerifyEmail() {
     }, 1000);
   };
 
-  useEffect(() => {
-    if (token) {
-      handleVerification();
-    }
-  }, [token]);
-  
-  const handleVerification = async () => {
-    setVerificationState("verifying");
-    try {
-      const res = await fetch(`http://localhost:8000/api/v1/auth/verify-email?token=${token}`);
-      if (!res.ok) throw new Error("Invalid or expired verification link");
-  
-      setVerificationState("verified");
-    } catch (err) {
-      setError("Email verification failed");
-      setVerificationState("error");
-    }
-  };
-  
-
   const handleResend = async () => {
     try {
-      // Simulate email resend
+      // Replace with actual resend logic if implemented
       await new Promise((resolve) => setTimeout(resolve, 1500));
       startResendTimer();
-    } catch (err) {
-      setError("Failed to resend verification email");
+    } catch {
+      setError("Failed to resend verification email.");
     }
-  };
-
-  const handleDemoVerification = () => {
-    setToken("valid-token-123");
-    handleVerification();
   };
 
   return (
@@ -108,51 +103,48 @@ export default function VerifyEmail() {
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
         {/* Left side - Info */}
         <div className="md:col-span-2 space-y-6">
-          <div className="flex flex-col space-y-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <Plant className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
-            </Link>
-            
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Verify Your Email
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              Follow these steps to verify your email address and access all features.
-            </p>
-          </div>
+          <Link href="/" className="flex items-center gap-2 mb-6">
+            <Plant className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
+          </Link>
+
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Verify Your Email
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400">
+            Follow these steps to verify your email address and access all features.
+          </p>
 
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                ${verificationState === "pending" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
-                1
-              </div>
-              <span className={`font-medium
-                ${verificationState === "pending" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
-                Check your email
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                ${verificationState === "verifying" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
-                2
-              </div>
-              <span className={`font-medium
-                ${verificationState === "verifying" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
-                Verify email
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                ${verificationState === "verified" ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"}`}>
-                3
-              </div>
-              <span className={`font-medium
-                ${verificationState === "verified" ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"}`}>
-                Access all features
-              </span>
-            </div>
+            {["Check your email", "Verify email", "Access all features"].map((text, idx) => {
+              const step = idx + 1;
+              const active =
+                (step === 1 && verificationState === "pending") ||
+                (step === 2 && verificationState === "verifying") ||
+                (step === 3 && verificationState === "verified");
+              return (
+                <div key={idx} className="flex items-center gap-3">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                      active
+                        ? "bg-primary text-white"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                    }`}
+                  >
+                    {step}
+                  </div>
+                  <span
+                    className={`font-medium ${
+                      active
+                        ? "text-primary dark:text-primary-300"
+                        : "text-gray-600 dark:text-gray-400"
+                    }`}
+                  >
+                    {text}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="pt-6 border-t border-gray-200 dark:border-gray-800">
@@ -162,25 +154,25 @@ export default function VerifyEmail() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Shield className="h-4 w-4 text-primary" />
-                <span>Enhanced account security</span>
+                Enhanced account security
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Bell className="h-4 w-4 text-primary" />
-                <span>Important notifications</span>
+                Important notifications
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Key className="h-4 w-4 text-primary" />
-                <span>Password recovery access</span>
+                Password recovery access
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <Lock className="h-4 w-4 text-primary" />
-                <span>Full platform features</span>
+                Full platform features
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Right side - Verification Status */}
+        {/* Right side - Status */}
         <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
@@ -209,8 +201,16 @@ export default function VerifyEmail() {
                 : "Check your email and click the verification link"}
             </CardDescription>
           </CardHeader>
+
           <CardContent>
-            {verificationState === "verified" ? (
+            {verificationState === "verifying" ? (
+              <div className="space-y-4">
+                <Progress value={progress} className="h-2" />
+                <p className="text-center text-gray-600 dark:text-gray-400">
+                  Verifying your email address...
+                </p>
+              </div>
+            ) : verificationState === "verified" ? (
               <div className="space-y-4">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-900">
                   <div className="flex items-start gap-3">
@@ -225,37 +225,9 @@ export default function VerifyEmail() {
                     </div>
                   </div>
                 </div>
-
-                <div className="space-y-3">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    You now have access to all platform features:
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                      <CheckCircle2 className="h-4 w-4 text-green-500" />
-                      <span>Enhanced account security</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                      <CheckCircle2 className="h-4 w-4 text-green-500" />
-                      <span>Important notifications</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                      <CheckCircle2 className="h-4 w-4 text-green-500" />
-                      <span>Password recovery</span>
-                    </li>
-                  </ul>
-                </div>
-
                 <Button className="w-full bg-primary hover:bg-primary-600 text-white" asChild>
                   <Link href="/dashboard">Continue to Dashboard</Link>
                 </Button>
-              </div>
-            ) : verificationState === "verifying" ? (
-              <div className="space-y-4">
-                <Progress value={progress} className="h-2" />
-                <p className="text-center text-gray-600 dark:text-gray-400">
-                  Verifying your email address...
-                </p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -274,21 +246,25 @@ export default function VerifyEmail() {
                 </div>
 
                 {error && (
-                  <Alert variant="destructive" className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900">
+                  <Alert
+                    variant="destructive"
+                    className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900"
+                  >
                     <AlertCircle className="h-4 w-4" />
-                    <AlertDescription className="text-red-800 dark:text-red-200">{error}</AlertDescription>
+                    <AlertDescription className="text-red-800 dark:text-red-200">
+                      {error}
+                    </AlertDescription>
                   </Alert>
                 )}
 
                 <div className="space-y-3">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    The verification link will expire in 24 hours. If you don't see the email:
+                    If you didn’t receive the email:
                   </p>
                   <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                     <li>• Check your spam folder</li>
                     <li>• Make sure the email address is correct</li>
-                    <li>• Wait a few minutes for the email to arrive</li>
-                    <li>• Try resending the verification email</li>
+                    <li>• Try resending the email</li>
                   </ul>
                 </div>
 
@@ -305,28 +281,18 @@ export default function VerifyEmail() {
                     Resend Verification Email
                   </Button>
                 )}
-
-                {/* Demo verification button */}
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-                  <Button
-                    variant="outline"
-                    className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
-                    onClick={handleDemoVerification}
-                  >
-                    Simulate Email Verification
-                  </Button>
-                </div>
               </div>
             )}
           </CardContent>
+
           <CardFooter className="border-t border-gray-200 dark:border-gray-700">
             <div className="w-full flex justify-between items-center">
               <Button
                 variant="ghost"
-                className="mt-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
+                className="text-gray-600 dark:text-gray-400"
                 asChild
               >
-                <Link href="/sign-in" className="flex items-center gap-2">
+                <Link href="/sign-in" className="flex mt-1 items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <ArrowLeft className="h-4 w-4" />
                   Back to Sign In
                 </Link>

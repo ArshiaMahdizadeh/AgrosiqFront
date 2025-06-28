@@ -13,11 +13,11 @@ export const authApi = baseApi.injectEndpoints({
     }),
     verifyEmail: builder.mutation({
       query: ({ token }) => ({
-        url: 'auth/verify-email',
-        method: 'POST',
-        body: { token },
+        url: `auth/verify-email?token=${token}`, // token in query param
+        method: 'GET',                          // match backend
       }),
     }),
+    
     resendVerificationEmail: builder.mutation({
       query: ({ email }) => ({
         url: 'auth/resend-verification-email',
