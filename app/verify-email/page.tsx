@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import { useVerifyEmailMutation } from "@/lib/redux/api/authApi";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -13,19 +12,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
-  Plane as Plant,
-  Mail,
   CheckCircle2,
   AlertCircle,
-  ArrowLeft,
   Loader2,
-  Bell,
+  Mail,
   Shield,
+  Bell,
   Key,
   Lock,
+  ArrowLeft,
+  Plane as Plant,
 } from "lucide-react";
 
 export default function VerifyEmail() {
@@ -45,47 +45,42 @@ export default function VerifyEmail() {
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    if (token) handleVerification();
+    if (token) {
+      console.log("Verifying token:", token);
+      handleVerification();
+    } else {
+      console.warn("Token not found in URL.");
+    }
     return () => clearInterval(timerRef.current);
   }, [token]);
 
   const handleVerification = async () => {
     setVerificationState("verifying");
 
-    // Optional loading progress bar
-    let val = 0;
     const interval = setInterval(() => {
-      val += 5;
-      setProgress(val);
-      if (val >= 100) clearInterval(interval);
+      setProgress((prev) => {
+        const next = prev + 5;
+        if (next >= 100) clearInterval(interval);
+        return next;
+      });
     }, 100);
 
     try {
-      // The API call now returns an object with token and user properties
       const response = await verifyEmail({ token }).unwrap();
 
-      // --- THIS IS THE UPDATED LOGIC ---
-      // 1. Save the user object to local storage
-      if (response.user) {
+      if (response.user && response.access_token) {
         localStorage.setItem("user", JSON.stringify(response.user));
-      }
-
-      // 2. Save the access token to local storage (or your state management)
-      if (response.access_token) {
         localStorage.setItem("accessToken", response.access_token);
       }
-      // ---------------------------------
 
       setVerificationState("verified");
 
-      // Now, this will work correctly because an access token is present!
       setTimeout(() => {
-        router.push("/dashboard");
+        router.replace("/dashboard");
       }, 1500);
-    } catch {
-      setError(
-        "Email verification failed. Your link may be expired or invalid."
-      );
+    } catch (err) {
+      console.error("Verification error:", err);
+      setError("Email verification failed. Your link may be expired or invalid.");
       setVerificationState("error");
     }
   };
@@ -105,8 +100,7 @@ export default function VerifyEmail() {
 
   const handleResend = async () => {
     try {
-      // Replace with actual resend logic if implemented
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate resend
       startResendTimer();
     } catch {
       setError("Failed to resend verification email.");
@@ -116,7 +110,7 @@ export default function VerifyEmail() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
-        {/* Left side - Info */}
+        {/* Sidebar section */}
         <div className="md:col-span-2 space-y-6">
           <Link href="/" className="flex items-center gap-2 mb-6">
             <Plant className="h-8 w-8 text-primary" />
@@ -129,96 +123,83 @@ export default function VerifyEmail() {
             Verify Your Email
           </h2>
           <p className="text-gray-600 dark:text-gray-400">
-            Follow these steps to verify your email address and access all
-            features.
+            Follow these steps to verify your email address and access all features.
           </p>
 
-          <div className="space-y-4">
-            {["Check your email", "Verify email", "Access all features"].map(
-              (text, idx) => {
-                const step = idx + 1;
-                const active =
-                  (step === 1 && verificationState === "pending") ||
-                  (step === 2 && verificationState === "verifying") ||
-                  (step === 3 && verificationState === "verified");
-                return (
-                  <div key={idx} className="flex items-center gap-3">
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                        active
-                          ? "bg-primary text-white"
-                          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                      }`}
-                    >
-                      {step}
-                    </div>
-                    <span
-                      className={`font-medium ${
-                        active
-                          ? "text-primary dark:text-primary-300"
-                          : "text-gray-600 dark:text-gray-400"
-                      }`}
-                    >
-                      {text}
-                    </span>
-                  </div>
-                );
-              }
-            )}
-          </div>
+          {["Check your email", "Verify email", "Access dashboard"].map((step, idx) => {
+            const active =
+              (idx === 0 && verificationState === "pending") ||
+              (idx === 1 && verificationState === "verifying") ||
+              (idx === 2 && verificationState === "verified");
+            return (
+              <div key={step} className="flex items-center gap-3">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                    active
+                      ? "bg-primary text-white"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                  }`}
+                >
+                  {idx + 1}
+                </div>
+                <span
+                  className={`font-medium ${
+                    active
+                      ? "text-primary dark:text-primary-300"
+                      : "text-gray-600 dark:text-gray-400"
+                  }`}
+                >
+                  {step}
+                </span>
+              </div>
+            );
+          })}
 
           <div className="pt-6 border-t border-gray-200 dark:border-gray-800">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
               Benefits of Email Verification
             </h3>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <Shield className="h-4 w-4 text-primary" />
-                Enhanced account security
+            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+              <li className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-primary" /> Secure your account
               </li>
-              <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <Bell className="h-4 w-4 text-primary" />
-                Important notifications
+              <li className="flex items-center gap-2">
+                <Bell className="h-4 w-4 text-primary" /> Enable notifications
               </li>
-              <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <Key className="h-4 w-4 text-primary" />
-                Password recovery access
+              <li className="flex items-center gap-2">
+                <Key className="h-4 w-4 text-primary" /> Password recovery
               </li>
-              <li className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                <Lock className="h-4 w-4 text-primary" />
-                Full platform features
+              <li className="flex items-center gap-2">
+                <Lock className="h-4 w-4 text-primary" /> Full access
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Right side - Status */}
+        {/* Main card section */}
         <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               {verificationState === "verified" ? (
                 <>
-                  <CheckCircle2 className="h-6 w-6 text-green-500" />
-                  Email Verified
+                  <CheckCircle2 className="h-6 w-6 text-green-500" /> Email Verified
                 </>
               ) : verificationState === "verifying" ? (
                 <>
-                  <Loader2 className="h-6 w-6 text-primary animate-spin" />
-                  Verifying Email
+                  <Loader2 className="h-6 w-6 text-primary animate-spin" /> Verifying Email
                 </>
               ) : (
                 <>
-                  <Mail className="h-6 w-6 text-primary" />
-                  Verify Your Email
+                  <Mail className="h-6 w-6 text-primary" /> Verify Your Email
                 </>
               )}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
               {verificationState === "verified"
-                ? "Your email has been successfully verified"
+                ? "Email verified successfully"
                 : verificationState === "verifying"
-                ? "Please wait while we verify your email"
-                : "Check your email and click the verification link"}
+                ? "Verifying your email..."
+                : "Click the link in your email to verify your account."}
             </CardDescription>
           </CardHeader>
 
@@ -227,52 +208,31 @@ export default function VerifyEmail() {
               <div className="space-y-4">
                 <Progress value={progress} className="h-2" />
                 <p className="text-center text-gray-600 dark:text-gray-400">
-                  Verifying your email address...
+                  Verifying...
                 </p>
               </div>
             ) : verificationState === "verified" ? (
               <div className="space-y-4">
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-900">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
-                    <div>
-                      <p className="text-green-800 dark:text-green-200">
-                        Email verified successfully:
-                      </p>
-                      <p className="font-medium text-green-900 dark:text-green-100 mt-1">
-                        {email}
-                      </p>
-                    </div>
-                  </div>
+                  <p className="text-green-800 dark:text-green-200">
+                    Your email was successfully verified.
+                  </p>
                 </div>
-                <Button
-                  className="w-full bg-primary hover:bg-primary-600 text-white"
-                  asChild
-                >
-                  <Link href="/dashboard">Continue to Dashboard</Link>
+                <Button className="w-full bg-primary text-white hover:bg-primary/90" asChild>
+                  <Link href="/dashboard">Go to Dashboard</Link>
                 </Button>
               </div>
             ) : (
               <div className="space-y-4">
                 <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-900">
-                  <div className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
-                    <div>
-                      <p className="text-blue-800 dark:text-blue-200">
-                        We've sent a verification email to:
-                      </p>
-                      <p className="font-medium text-blue-900 dark:text-blue-100 mt-1">
-                        {email}
-                      </p>
-                    </div>
-                  </div>
+                  <p className="text-blue-800 dark:text-blue-200">
+                    We sent a verification link to:{" "}
+                    <span className="font-medium text-blue-900 dark:text-blue-100">{email}</span>
+                  </p>
                 </div>
 
                 {error && (
-                  <Alert
-                    variant="destructive"
-                    className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900"
-                  >
+                  <Alert variant="destructive" className="bg-red-50 dark:bg-red-900/20">
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription className="text-red-800 dark:text-red-200">
                       {error}
@@ -280,27 +240,21 @@ export default function VerifyEmail() {
                   </Alert>
                 )}
 
-                <div className="space-y-3">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    If you didn’t receive the email:
-                  </p>
-                  <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                    <li>• Check your spam folder</li>
-                    <li>• Make sure the email address is correct</li>
-                    <li>• Try resending the email</li>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
+                  <p>Didn’t get the email?</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Check your spam folder</li>
+                    <li>Ensure your email is correct</li>
+                    <li>Click below to resend</li>
                   </ul>
                 </div>
 
                 {resendTimer > 0 ? (
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    You can request another email in {resendTimer} seconds
+                    You can resend in {resendTimer} seconds
                   </p>
                 ) : (
-                  <Button
-                    variant="outline"
-                    className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
-                    onClick={handleResend}
-                  >
+                  <Button onClick={handleResend} variant="outline" className="w-full border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                     Resend Verification Email
                   </Button>
                 )}
@@ -310,23 +264,12 @@ export default function VerifyEmail() {
 
           <CardFooter className="border-t border-gray-200 dark:border-gray-700">
             <div className="w-full flex justify-between items-center">
-              <Button
-                variant="ghost"
-                className="text-gray-600 dark:text-gray-400"
-                asChild
-              >
-                <Link
-                  href="/sign-in"
-                  className="flex mt-1 items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Sign In
+              <Button variant="ghost" asChild>
+                <Link href="/sign-in" className="flex mt-1 items-center gap-2 dark:hover:bg-gray-700">
+                  <ArrowLeft className="h-4 w-4" /> Back to Sign In
                 </Link>
               </Button>
-              <Link
-                href="#"
-                className="text-sm text-primary hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300"
-              >
+              <Link href="#" className="text-sm text-primary">
                 Need Help?
               </Link>
             </div>
