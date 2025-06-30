@@ -25,7 +25,6 @@ import { TrendingUp, TrendingDown, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample data for the product charts
 const productData = {
   "Pistachio": {
     price: 14.5,
@@ -99,7 +98,6 @@ export default function ProductCharts() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section title animation
       gsap.from(".section-title", {
         opacity: 0,
         y: 30,
@@ -111,7 +109,6 @@ export default function ProductCharts() {
         },
       });
       
-      // Staggered cards animation
       gsap.from(".product-card", {
         opacity: 0,
         y: 40,

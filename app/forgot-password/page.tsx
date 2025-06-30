@@ -17,7 +17,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Plane as Plant, Key, CheckCircle2, AlertCircle, ArrowLeft, Mail, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const DEMO_EMAILS = ["admin@zarrin-saderat.com", "test@example.com"];
+const DEMO_EMAILS = ["admin@agrosiq.com", "test@example.com"];
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -29,14 +29,12 @@ export default function ForgotPassword() {
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    // Auto-focus email input on mount
     if (emailInputRef.current && !isEmailSent) {
       emailInputRef.current.focus();
     }
   }, [isEmailSent]);
 
   useEffect(() => {
-    // Cleanup timer on unmount
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -79,10 +77,8 @@ export default function ForgotPassword() {
     setIsLoading(true);
 
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // For demo purposes, only allow specific test emails
       if (!DEMO_EMAILS.includes(email)) {
         throw new Error("No account found with this email address");
       }
@@ -99,7 +95,6 @@ export default function ForgotPassword() {
   const handleResend = async () => {
     setIsLoading(true);
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
       startResendTimer();
     } catch (err) {
@@ -110,14 +105,14 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-32">
+    <div className="min-h-screen flex items-center justify-center px-4 py-32 bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-4xl grid md:grid-cols-5 gap-6">
         {/* Left side - Info */}
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col space-y-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <Plant className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-primary">Agrosiq</span>
+              <span className="text-xl font-bold text-primary dark:text-primary-300">Agrosiq</span>
             </Link>
             
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -131,45 +126,45 @@ export default function ForgotPassword() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                !isEmailSent ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium",
+                !isEmailSent ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
               )}>
                 1
               </div>
               <span className={cn(
                 "font-medium",
-                !isEmailSent ? "text-primary" : "text-gray-600"
+                !isEmailSent ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
               )}>
                 Enter your email address
               </span>
             </div>
             <div className="flex items-center gap-3">
               <div className={cn(
-                "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                isEmailSent ? "bg-primary text-white" : "bg-gray-200 text-gray-600"
+                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium",
+                isEmailSent ? "bg-primary text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
               )}>
                 2
               </div>
               <span className={cn(
                 "font-medium",
-                isEmailSent ? "text-primary" : "text-gray-600"
+                isEmailSent ? "text-primary dark:text-primary-300" : "text-gray-600 dark:text-gray-400"
               )}>
                 Check your email
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm bg-gray-200 text-gray-600">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
                 3
               </div>
-              <span className="font-medium text-gray-600">
+              <span className="font-medium text-gray-600 dark:text-gray-400">
                 Click the reset link
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm bg-gray-200 text-gray-600">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
                 4
               </div>
-              <span className="font-medium text-gray-600">
+              <span className="font-medium text-gray-600 dark:text-gray-400">
                 Create new password
               </span>
             </div>
@@ -190,9 +185,9 @@ export default function ForgotPassword() {
         </div>
 
         {/* Right side - Form */}
-        <Card className="md:col-span-3 shadow-lg">
+        <Card className="md:col-span-3 shadow-lg bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
               {isEmailSent ? (
                 <>
                   <CheckCircle2 className="h-6 w-6 text-green-500" />
@@ -205,7 +200,7 @@ export default function ForgotPassword() {
                 </>
               )}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
               {isEmailSent
                 ? "Please check your email for password reset instructions"
                 : "Enter your email address to receive password reset instructions"}
@@ -246,7 +241,7 @@ export default function ForgotPassword() {
                 ) : (
                   <Button
                     variant="outline"
-                    className="w-full"
+                    className="w-full bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-600"
                     onClick={handleResend}
                     disabled={isLoading}
                   >
@@ -264,7 +259,7 @@ export default function ForgotPassword() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email" className="text-gray-900 dark:text-white">Email Address</Label>
                   <Input
                     ref={emailInputRef}
                     id="email"
@@ -275,20 +270,23 @@ export default function ForgotPassword() {
                       setEmail(e.target.value);
                       setError("");
                     }}
-                    className={error ? "border-red-500" : ""}
+                    className={cn(
+                      "bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400",
+                      error ? "border-red-500" : ""
+                    )}
                     disabled={isLoading}
                   />
                   {error && (
-                    <Alert variant="destructive\" className="py-2">
+                    <Alert variant="destructive" className="py-2 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-900">
                       <AlertCircle className="h-4 w-4" />
-                      <AlertDescription>{error}</AlertDescription>
+                      <AlertDescription className="text-red-800 dark:text-red-200">{error}</AlertDescription>
                     </Alert>
                   )}
                 </div>
 
                 <Button
                   type="submit"
-                  className="w-full bg-primary hover:bg-primary-600"
+                  className="w-full bg-primary hover:bg-primary-600 text-white"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -303,14 +301,14 @@ export default function ForgotPassword() {
               </form>
             )}
           </CardContent>
-          <CardFooter>
+          <CardFooter className="border-t border-gray-200 dark:border-gray-800">
             <div className="w-full flex justify-between items-center">
               <Button
                 variant="ghost"
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 asChild
               >
-                <Link href="/sign-in" className="flex items-center gap-2">
+                <Link href="/sign-in" className="flex items-center gap-2 border-gray-300 dark:bg-gray-800 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-200">
                   <ArrowLeft className="h-4 w-4" />
                   Back to Sign In
                 </Link>

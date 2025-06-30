@@ -18,7 +18,6 @@ import { ArrowUp, ArrowDown, TrendingUp, MapPin } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample data
 const priceData = {
   "1M": [
     { name: "Week 1", price: 1420, demand: 240 },
@@ -83,7 +82,6 @@ export default function DashboardPreview() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section entrance animation
       gsap.from(sectionRef.current, {
         opacity: 0,
         y: 50,
@@ -96,7 +94,6 @@ export default function DashboardPreview() {
         },
       });
       
-      // Chart and regions staggered animation
       gsap.from([chartRef.current, regionsRef.current], {
         opacity: 0,
         y: 30,

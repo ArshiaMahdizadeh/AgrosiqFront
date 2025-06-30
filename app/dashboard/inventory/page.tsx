@@ -44,7 +44,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample inventory data
 const inventoryData = {
   summary: {
     totalItems: 1250,
@@ -133,7 +132,6 @@ export default function Inventory() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Animate summary cards
       gsap.from(".summary-card", {
         y: 20,
         opacity: 0,
@@ -142,7 +140,6 @@ export default function Inventory() {
         ease: "power2.out",
       });
 
-      // Animate warehouse cards
       gsap.from(".warehouse-card", {
         y: 30,
         opacity: 0,
@@ -152,7 +149,6 @@ export default function Inventory() {
         ease: "power2.out",
       });
 
-      // Animate table
       gsap.from(tableRef.current, {
         y: 40,
         opacity: 0,

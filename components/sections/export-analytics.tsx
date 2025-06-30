@@ -34,7 +34,6 @@ import { Clock, TrendingUp, TrendingDown, AlertCircle } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample data for export analytics
 const exportData = {
   "Pistachio": {
     price: 14.5,
@@ -118,7 +117,6 @@ const exportData = {
   },
 };
 
-// Colors for the pie chart
 const COLORS = ["#00796B", "#8BC34A", "#B3E5FC", "#FFCCBC"];
 
 export default function ExportAnalytics() {
@@ -131,7 +129,6 @@ export default function ExportAnalytics() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section entrance animation
       gsap.from(sectionRef.current, {
         opacity: 0,
         y: 50,
@@ -144,7 +141,6 @@ export default function ExportAnalytics() {
         },
       });
       
-      // Staggered animation for chart and price card
       gsap.from([chartRef.current, priceRef.current], {
         opacity: 0,
         y: 30,

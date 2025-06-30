@@ -35,7 +35,6 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 
-// Sample data
 const revenueData = [
   { month: "Jan", actual: 45000, budget: 42000 },
   { month: "Feb", actual: 52000, budget: 45000 },

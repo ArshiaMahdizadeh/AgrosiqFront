@@ -161,7 +161,6 @@ export function Chatbot({ className }: ChatbotProps) {
       };
     }
     
-    // Default response
     return {
       content: "I can help you analyze various aspects of your agricultural export data. Would you like me to focus on revenue trends, market opportunities, performance insights, or risk analysis?",
       suggestions: ["Revenue analysis", "Market trends", "Performance metrics", "Risk assessment"],
@@ -176,7 +175,6 @@ export function Chatbot({ className }: ChatbotProps) {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate typing delay
     setTimeout(() => {
       const response = generateBotResponse(userMessage);
       addBotMessage(response.content, response.suggestions);

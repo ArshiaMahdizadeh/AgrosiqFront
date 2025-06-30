@@ -46,7 +46,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Simulated initial data
 const initialSystemMetrics = {
   cpu: 45,
   memory: 62,
@@ -93,7 +92,6 @@ export default function Realtime() {
   const streamInterval = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    // Animation setup
     const ctx = gsap.context(() => {
       gsap.from(".metrics-card", {
         y: 20,
@@ -130,7 +128,6 @@ export default function Realtime() {
     const frequency = parseInt(updateFrequency) * 1000;
 
     streamInterval.current = setInterval(() => {
-      // Update system metrics
       setSystemMetrics(prev => ({
         cpu: Math.min(100, Math.max(0, prev.cpu + (Math.random() * 10 - 5))),
         memory: Math.min(100, Math.max(0, prev.memory + (Math.random() * 8 - 4))),
@@ -138,7 +135,6 @@ export default function Realtime() {
         network: Math.min(100, Math.max(0, prev.network + (Math.random() * 12 - 6))),
       }));
 
-      // Update market prices
       const newPrices = {
         saffron: marketPrices.saffron * (1 + (Math.random() * 0.02 - 0.01)),
         pistachio: marketPrices.pistachio * (1 + (Math.random() * 0.02 - 0.01)),
@@ -147,17 +143,15 @@ export default function Realtime() {
       };
       setMarketPrices(newPrices);
 
-      // Update price history
       setPriceHistory(prev => {
         const newHistory = [...prev, {
           timestamp: new Date().toLocaleTimeString(),
           ...newPrices,
         }];
-        return newHistory.slice(-20); // Keep last 20 data points
+        return newHistory.slice(-20);
       });
 
-      // Simulate random notifications
-      if (Math.random() < 0.2) { // 20% chance of notification
+      if (Math.random() < 0.2) {
         const notificationTypes = ["success", "warning", "error"] as const;
         const type = notificationTypes[Math.floor(Math.random() * notificationTypes.length)];
         const messages = {
@@ -172,11 +166,10 @@ export default function Realtime() {
           type,
           message,
           timestamp: new Date(),
-        }, ...prev].slice(0, 5)); // Keep last 5 notifications
+        }, ...prev].slice(0, 5));
       }
 
-      // Simulate service status changes
-      if (Math.random() < 0.1) { // 10% chance of status change
+      if (Math.random() < 0.1) {
         const services = ["mainServer", "database", "websocket", "api"] as const;
         const service = services[Math.floor(Math.random() * services.length)];
         const statuses = ["healthy", "degraded", "error"] as const;

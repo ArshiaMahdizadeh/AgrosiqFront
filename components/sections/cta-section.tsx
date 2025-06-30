@@ -17,7 +17,6 @@ export default function CTASection() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section entrance animation
       gsap.from(contentRef.current, {
         opacity: 0,
         y: 30,
@@ -30,7 +29,6 @@ export default function CTASection() {
         },
       });
       
-      // Form animation
       gsap.from(formRef.current, {
         opacity: 0,
         y: 20,

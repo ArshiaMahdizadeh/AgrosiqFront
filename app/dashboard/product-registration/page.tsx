@@ -114,11 +114,9 @@ export default function ProductRegistration() {
 
     setIsSubmitting(true);
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       setShowSuccess(true);
       
-      // Reset form after success
       setTimeout(() => {
         setShowSuccess(false);
         setFormData({

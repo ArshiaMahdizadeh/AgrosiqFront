@@ -1,4 +1,3 @@
-// Product Types
 export interface Product {
   id: string;
   name: string;
@@ -9,7 +8,6 @@ export interface Product {
   percentage: number;
 }
 
-// Chart Data Types
 export interface ChartDataPoint {
   name: string;
   value: number;
@@ -27,7 +25,6 @@ export interface PieChartPoint {
   value: number;
 }
 
-// Region Types
 export interface Region {
   region: string;
   status: 'Very High' | 'High' | 'Medium' | 'Low';
@@ -35,7 +32,6 @@ export interface Region {
   products: string[];
 }
 
-// Auth Types
 export interface UserCredentials {
   email: string;
   password: string;

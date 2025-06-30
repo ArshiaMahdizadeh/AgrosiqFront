@@ -65,7 +65,7 @@ interface ProfileData {
   notifications: NotificationSettings;
   twoFactorEnabled: boolean;
   avatarUrl?: string;
-  tempAvatar?: string; // For preview before saving
+  tempAvatar?: string;
 }
 
 export default function ProfilePage() {
@@ -94,7 +94,6 @@ export default function ProfilePage() {
     tempAvatar: undefined,
   });
 
-  // Animation on mount
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".profile-card", {
@@ -135,10 +134,8 @@ export default function ProfilePage() {
     
     setIsSaving(true);
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // If there's a temp avatar, set it as the new avatar
       if (formData.tempAvatar) {
         setFormData(prev => ({
           ...prev,
@@ -158,7 +155,6 @@ export default function ProfilePage() {
   };
 
   const handleCancelEdit = () => {
-    // Clear any temporary avatar changes
     setFormData(prev => ({ ...prev, tempAvatar: undefined }));
     setIsEditing(false);
   };
@@ -237,7 +233,7 @@ export default function ProfilePage() {
   );
 
   return (
-    <div ref={profileRef} className="space-y-6 p-6 max-w-4xl mx-auto">
+    <div ref={profileRef} className="space-y-6 p-6 max-w-4xl mx-auto pb-12">
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>

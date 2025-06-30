@@ -4,23 +4,19 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Helper hook for GSAP animations
 export const useGSAPAnimation = () => {
   const timeline = useRef<GSAPTimeline | null>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
-    // Create a timeline that we can use for animations
     timeline.current = gsap.timeline();
     
-    // Cleanup function
     return () => {
       if (timeline.current) {
         timeline.current.kill();
       }
       
-      // Kill all ScrollTriggers to prevent memory leaks
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
@@ -28,7 +24,6 @@ export const useGSAPAnimation = () => {
   return timeline.current;
 };
 
-// Hook for scroll-based animations
 export const useScrollAnimation = (
   elementRef: React.RefObject<HTMLElement>,
   options = {}

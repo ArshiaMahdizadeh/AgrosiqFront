@@ -17,7 +17,6 @@ export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
 
   const handleThemeChange = (newTheme: string) => {
-    // Animate theme transition
     gsap.to("body", {
       opacity: 0,
       duration: 0.2,

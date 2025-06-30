@@ -56,7 +56,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample financial data
 const financialData = {
   overview: {
     totalRevenue: { value: 2450000, change: 12.5, trend: "up" },
@@ -113,7 +112,6 @@ export default function FinancePage() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Page entrance animation
       gsap.from(pageRef.current, {
         opacity: 0,
         y: 20,
@@ -121,7 +119,6 @@ export default function FinancePage() {
         ease: "power2.out",
       });
       
-      // KPI cards animation
       gsap.from(".kpi-card", {
         opacity: 0,
         y: 30,
@@ -131,7 +128,6 @@ export default function FinancePage() {
         ease: "power2.out",
       });
       
-      // Charts animation
       gsap.from(".chart-container", {
         opacity: 0,
         y: 40,

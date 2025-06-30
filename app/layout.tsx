@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { MobileBottomNav } from '@/components/mobile-bottom-nav';
-import ClientProviders from './client-providers'; // ✅ import the unified provider
+import ClientProviders from './client-providers';
 
 const inter = Inter({ subsets: ['latin'] });
 

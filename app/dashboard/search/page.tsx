@@ -45,7 +45,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample search results data
 const searchResults = [
   {
     id: 1,
@@ -104,14 +103,12 @@ const searchResults = [
   },
 ];
 
-// Sample search history
 const searchHistory = [
   { query: "market analysis europe", timestamp: "2025-03-15 14:30" },
   { query: "competitor pricing strategy", timestamp: "2025-03-14 16:45" },
   { query: "export regulations 2025", timestamp: "2025-03-13 09:15" },
 ];
 
-// Sample saved searches
 const savedSearches = [
   { name: "European Markets", query: "market europe trends", filters: "Markets, Last 3 months" },
   { name: "Competitor Analysis", query: "competitor analysis global", filters: "Competitors, Active" },
@@ -137,7 +134,6 @@ export default function SearchPage() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Search bar animation
       gsap.from(searchRef.current, {
         y: -20,
         opacity: 0,
@@ -145,7 +141,6 @@ export default function SearchPage() {
         ease: "power2.out",
       });
       
-      // Results animation
       gsap.from(".search-result", {
         y: 20,
         opacity: 0,
@@ -164,13 +159,12 @@ export default function SearchPage() {
 
   const handleSearch = async () => {
     setIsLoading(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     setIsLoading(false);
   };
 
   return (
-    <div ref={pageRef} className="space-y-6 p-6">
+    <div ref={pageRef} className="space-y-6 p-6 pb-12">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
@@ -386,7 +380,7 @@ export default function SearchPage() {
             </div>
 
             {/* Meta Info */}
-            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-white">
               <Badge variant="secondary">{result.category}</Badge>
               <div className="flex items-center gap-1">
                 <Clock className="h-3 w-3" />

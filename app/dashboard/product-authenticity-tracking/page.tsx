@@ -32,7 +32,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample product data
 const sampleProducts = {
   "SF001": {
     name: "Premium Saffron",
@@ -102,7 +101,6 @@ export default function ProductAuthenticity() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Page entrance animation
       gsap.from(pageRef.current, {
         opacity: 0,
         y: 20,
@@ -110,7 +108,6 @@ export default function ProductAuthenticity() {
         ease: "power2.out",
       });
       
-      // Scanner and result cards animation
       gsap.from([scannerRef.current, resultRef.current], {
         opacity: 0,
         y: 30,
@@ -130,13 +127,11 @@ export default function ProductAuthenticity() {
     setScanProgress(0);
     
     try {
-      // Simulate scanning progress
       for (let i = 0; i <= 100; i += 10) {
         await new Promise(resolve => setTimeout(resolve, 100));
         setScanProgress(i);
       }
       
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
       
       const randomProduct = Object.keys(sampleProducts)[
@@ -165,7 +160,6 @@ export default function ProductAuthenticity() {
       setProduct(foundProduct);
       setProductId(searchId);
       
-      // Animate result card
       if (resultRef.current) {
         gsap.from(resultRef.current, {
           opacity: 0,

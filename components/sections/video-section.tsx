@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function VideoSection() {
+  const [isPlaying, setIsPlaying] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,6 @@ export default function VideoSection() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section entrance animation
       gsap.from(sectionRef.current, {
         opacity: 0,
         duration: 0.8,
@@ -29,7 +29,6 @@ export default function VideoSection() {
         },
       });
       
-      // Video and text staggered animation
       gsap.from([videoRef.current, textRef.current], {
         opacity: 0,
         y: 30,
@@ -59,7 +58,6 @@ export default function VideoSection() {
                   size="icon"
                   aria-label="Play"
                   onClick={() => {
-                    // In a real implementation, this would trigger the YouTube embed to play
                     console.log("Play video");
                   }}
                 >
@@ -68,14 +66,38 @@ export default function VideoSection() {
               </div>
               
               {/* Video thumbnail */}
-              <div className="relative w-full h-full">
-                <Image 
-                  src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg"
-                  alt="Agricultural exports video thumbnail"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <div ref={videoRef} className="relative rounded-xl overflow-hidden aspect-video shadow-lg">
+  <div className="relative w-full h-full">
+    <Image 
+      src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg"
+      alt="Agricultural exports video thumbnail"
+      fill
+      className="object-cover"
+    />
+  </div>
+
+  {isPlaying ? (
+    <iframe
+      className="absolute top-0 left-0 w-full h-full z-20"
+      src="https://www.youtube.com/embed/uINxlCBj-5Y?autoplay=1"
+      title="Agrosiq Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  ) : (
+    <div className="absolute inset-0 bg-black/20 flex items-center justify-center z-10 group">
+      <Button 
+        className="bg-primary/90 hover:bg-primary text-white rounded-full h-16 w-16 flex items-center justify-center group-hover:scale-110 transition-transform" 
+        size="icon"
+        aria-label="Play"
+        onClick={() => setIsPlaying(true)}
+      >
+        <Play className="h-8 w-8" />
+      </Button>
+    </div>
+  )}
+</div>
+
             </div>
 
             <div ref={textRef}>

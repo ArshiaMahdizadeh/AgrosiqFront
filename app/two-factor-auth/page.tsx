@@ -44,11 +44,9 @@ import {
 } from "lucide-react";
 import gsap from "gsap";
 
-// Demo verification codes
 const VALID_CODES = ["123456", "000000", "111111"];
 const EMAIL_VALID_CODES = ["654321", "999999", "222222"];
 
-// Demo backup codes
 const generateBackupCodes = () => {
   const codes = [];
   for (let i = 0; i < 8; i++) {
@@ -97,7 +95,7 @@ export default function TwoFactorAuthSetup() {
   const [backupCodesConfirmed, setBackupCodesConfirmed] = useState(false);
   const [setupComplete, setSetupComplete] = useState(false);
   
-  const secretKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ"; // Demo secret key
+  const secretKey = "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ";
   const qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=otpauth://totp/Agrosiq:user@example.com?secret=" + secretKey;
   
   const pageRef = useRef<HTMLDivElement>(null);
@@ -105,7 +103,6 @@ export default function TwoFactorAuthSetup() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Page entrance animation
       gsap.from(pageRef.current, {
         opacity: 0,
         y: 20,
@@ -113,7 +110,6 @@ export default function TwoFactorAuthSetup() {
         ease: "power3.out",
       });
       
-      // Cards animation
       gsap.from(".method-card", {
         opacity: 0,
         y: 30,
@@ -164,7 +160,6 @@ export default function TwoFactorAuthSetup() {
     setIsVerifying(true);
 
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       const validCodes = selectedMethod === "email" ? EMAIL_VALID_CODES : VALID_CODES;
@@ -187,7 +182,6 @@ export default function TwoFactorAuthSetup() {
 
   const handleResendCode = async () => {
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       startResendTimer();
     } catch (err) {

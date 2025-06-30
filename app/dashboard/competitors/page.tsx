@@ -54,7 +54,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample competitor data
 const competitors = [
   {
     id: 1,
@@ -122,7 +121,6 @@ const competitors = [
   },
 ];
 
-// Performance comparison data
 const performanceData = [
   { metric: "Market Share", us: 25, competitor1: 28, competitor2: 22 },
   { metric: "Revenue Growth", us: 18, competitor1: 12.5, competitor2: -2.3 },
@@ -131,7 +129,6 @@ const performanceData = [
   { metric: "Global Presence", us: 80, competitor1: 95, competitor2: 70 },
 ];
 
-// Market trends data
 const marketTrendsData = [
   { month: "Jan", us: 82, competitor1: 85, competitor2: 78 },
   { month: "Feb", us: 84, competitor1: 83, competitor2: 80 },
@@ -151,7 +148,6 @@ export default function Competitors() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Animate cards
       gsap.from(".competitor-card", {
         y: 20,
         opacity: 0,
@@ -160,7 +156,6 @@ export default function Competitors() {
         ease: "power2.out",
       });
 
-      // Animate charts
       gsap.from(".chart-container", {
         y: 30,
         opacity: 0,

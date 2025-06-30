@@ -15,7 +15,6 @@ export default function ClientProviders({
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Mobile viewport height fix
     const setVh = () => {
       document.documentElement.style.setProperty(
         '--vh',

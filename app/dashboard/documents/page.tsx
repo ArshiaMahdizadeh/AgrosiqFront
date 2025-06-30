@@ -51,7 +51,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample document types
 const documentTypes = [
   "Certificate of Origin",
   "Invoice",
@@ -61,7 +60,6 @@ const documentTypes = [
   "Export License",
 ];
 
-// Sample documents data
 const initialDocuments = [
   {
     id: "doc1",
@@ -157,7 +155,6 @@ export default function DocumentManagement() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Animate cards
       gsap.from(".document-card", {
         y: 20,
         opacity: 0,
@@ -196,11 +193,10 @@ export default function DocumentManagement() {
   const handleFiles = async (files: File[]) => {
     setUploadError("");
     
-    // Validate files
     const invalidFiles = files.filter(
       file => 
         !["application/pdf", "image/jpeg", "image/png"].includes(file.type) ||
-        file.size > 10 * 1024 * 1024 // 10MB limit
+        file.size > 10 * 1024 * 1024
     );
 
     if (invalidFiles.length > 0) {
@@ -210,16 +206,13 @@ export default function DocumentManagement() {
 
     setIsUploading(true);
     
-    // Simulate upload progress
     for (let i = 0; i <= 100; i += 10) {
       setUploadProgress(i);
       await new Promise(resolve => setTimeout(resolve, 200));
     }
 
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Add new documents
     const newDocs = files.map((file, index) => ({
       id: `doc${Date.now() + index}`,
       name: file.name,
@@ -503,7 +496,7 @@ export default function DocumentManagement() {
 
         {/* Navigation Buttons */}
         {filteredDocuments.length > 0 && (
-          <div className="flex justify-center mt-6 gap-2">
+          <div className="flex justify-center mt-6 gap-2 pb-8">
             <Button
               variant="outline"
               size="icon"

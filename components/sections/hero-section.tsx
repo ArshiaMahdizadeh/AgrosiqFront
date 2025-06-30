@@ -15,7 +15,6 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero entrance animation
       gsap.from(textRef.current, {
         y: 50,
         opacity: 0,
@@ -32,7 +31,6 @@ export default function HeroSection() {
         delay: 0.6,
       });
 
-      // Floating leaf animations
       gsap.to(".floating-leaf", {
         y: -15,
         rotation: 5,
@@ -43,7 +41,6 @@ export default function HeroSection() {
         stagger: 0.3,
       });
 
-      // Scroll indicator animation
       gsap.to(scrollIndicatorRef.current, {
         y: 10,
         opacity: 0.5,

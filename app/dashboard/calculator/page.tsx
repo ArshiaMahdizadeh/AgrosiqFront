@@ -40,7 +40,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Calculator interfaces
 interface ROICalculation {
   totalReturn: number;
   roi: number;
@@ -79,7 +78,6 @@ interface ExportMarginCalculation {
 export default function CalculatorPage() {
   const [activeTab, setActiveTab] = useState("roi");
   
-  // ROI Calculator State
   const [roiData, setRoiData] = useState({
     initialInvestment: "",
     finalValue: "",
@@ -87,7 +85,6 @@ export default function CalculatorPage() {
     additionalCosts: "",
   });
 
-  // Profitability Calculator State
   const [profitabilityData, setProfitabilityData] = useState({
     revenue: "",
     costOfGoods: "",
@@ -95,14 +92,12 @@ export default function CalculatorPage() {
     units: "",
   });
 
-  // Break-even Calculator State
   const [breakEvenData, setBreakEvenData] = useState({
     fixedCosts: "",
     variableCostPerUnit: "",
     sellingPricePerUnit: "",
   });
 
-  // Export Margin Calculator State
   const [exportData, setExportData] = useState({
     sellingPrice: "",
     productCost: "",
@@ -119,7 +114,6 @@ export default function CalculatorPage() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Page entrance animation
       gsap.from(pageRef.current, {
         opacity: 0,
         y: 20,
@@ -127,7 +121,6 @@ export default function CalculatorPage() {
         ease: "power2.out",
       });
       
-      // Cards animation
       gsap.from(".calculator-card", {
         opacity: 0,
         y: 30,
@@ -141,7 +134,6 @@ export default function CalculatorPage() {
     return () => ctx.revert();
   }, []);
 
-  // ROI Calculations
   const calculateROI = (): ROICalculation => {
     const initial = parseFloat(roiData.initialInvestment) || 0;
     const final = parseFloat(roiData.finalValue) || 0;
@@ -176,7 +168,6 @@ export default function CalculatorPage() {
     };
   };
 
-  // Profitability Calculations
   const calculateProfitability = (): ProfitabilityCalculation => {
     const revenue = parseFloat(profitabilityData.revenue) || 0;
     const cogs = parseFloat(profitabilityData.costOfGoods) || 0;
@@ -211,7 +202,6 @@ export default function CalculatorPage() {
     };
   };
 
-  // Break-even Calculations
   const calculateBreakEven = (): BreakEvenCalculation => {
     const fixedCosts = parseFloat(breakEvenData.fixedCosts) || 0;
     const variableCost = parseFloat(breakEvenData.variableCostPerUnit) || 0;
@@ -246,7 +236,6 @@ export default function CalculatorPage() {
     };
   };
 
-  // Export Margin Calculations
   const calculateExportMargin = (): ExportMarginCalculation => {
     const sellingPrice = parseFloat(exportData.sellingPrice) || 0;
     const productCost = parseFloat(exportData.productCost) || 0;

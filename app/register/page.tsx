@@ -49,20 +49,17 @@ export default function Register() {
   ]);
 
   const [formData, setFormData] = useState({
-    // Step 1: Personal Information
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     
-    // Step 2: Business Details
     companyName: "",
     businessType: "",
     country: "",
     city: "",
     businessSize: "",
     
-    // Step 3: Security
     password: "",
     confirmPassword: "",
     agreeTerms: false,
@@ -73,11 +70,11 @@ export default function Register() {
 
   const validatePassword = (password: string) => {
     const requirements = [
-      { regex: /.{8,}/, index: 0 }, // Length
-      { regex: /[A-Z]/, index: 1 }, // Uppercase
-      { regex: /[a-z]/, index: 2 }, // Lowercase
-      { regex: /[0-9]/, index: 3 }, // Number
-      { regex: /[^A-Za-z0-9]/, index: 4 }, // Special character
+      { regex: /.{8,}/, index: 0 },
+      { regex: /[A-Z]/, index: 1 },
+      { regex: /[a-z]/, index: 2 },
+      { regex: /[0-9]/, index: 3 },
+      { regex: /[^A-Za-z0-9]/, index: 4 },
     ];
 
     const newRequirements = [...passwordRequirements];
@@ -97,7 +94,6 @@ export default function Register() {
       validatePassword(value);
     }
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
@@ -162,7 +158,6 @@ export default function Register() {
         const response = await register(payload).unwrap();
         console.log('Registration success:', response);
         
-        // redirect to verification page with email param
         router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       } catch (err) {
         console.error('Registration failed:', err);

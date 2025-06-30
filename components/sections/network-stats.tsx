@@ -41,7 +41,6 @@ export default function NetworkStats() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Section entrance animation
       gsap.from(sectionRef.current, {
         opacity: 0,
         y: 30,
@@ -54,7 +53,6 @@ export default function NetworkStats() {
         },
       });
       
-      // Cards animation
       gsap.from(".stat-card", {
         opacity: 0,
         y: 30,
@@ -67,7 +65,6 @@ export default function NetworkStats() {
         },
       });
       
-      // Counter animations
       counterRefs.current.forEach((ref, index) => {
         if (ref) {
           let startValue = 0;

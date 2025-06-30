@@ -69,7 +69,6 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Sample shipping data
 const shipments = [
     {
       id: "SH001",
@@ -197,7 +196,6 @@ export default function ShippingPage() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Page entrance animation
       gsap.from(pageRef.current, {
         opacity: 0,
         y: 20,
@@ -205,7 +203,6 @@ export default function ShippingPage() {
         ease: "power2.out",
       });
       
-      // Summary cards animation
       gsap.from(".summary-card", {
         opacity: 0,
         y: 30,
@@ -215,7 +212,6 @@ export default function ShippingPage() {
         ease: "power2.out",
       });
       
-      // Table animation
       gsap.from(tableRef.current, {
         opacity: 0,
         y: 40,
@@ -292,7 +288,7 @@ export default function ShippingPage() {
 
   const handleViewTracking = (shipmentId: string) => {
     setSelectedShipment(shipmentId);
-    setActiveTab("tracking"); // Switch to Live Tracking tab
+    setActiveTab("tracking");
   };
 
   return (

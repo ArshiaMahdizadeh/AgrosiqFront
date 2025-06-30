@@ -21,14 +21,12 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    // Prevent body scroll when menu is open
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
 
-    // Mobile menu animation
     if (mobileMenuOpen) {
       gsap.fromTo(
         ".mobile-menu",
@@ -44,7 +42,6 @@ export function Navbar() {
         }
       );
 
-      // Animate overlay
       gsap.to(".menu-overlay", {
         opacity: 1,
         duration: 0.3,
@@ -58,7 +55,6 @@ export function Navbar() {
         ease: "power3.in",
       });
 
-      // Fade out overlay
       gsap.to(".menu-overlay", {
         opacity: 0,
         duration: 0.2,
